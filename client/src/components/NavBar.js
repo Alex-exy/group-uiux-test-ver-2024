@@ -66,7 +66,7 @@ const ReserveARide = () => {
   useEffect(() => {
     const fetchRides = async () => {
       try {
-        const response = await axios.post('http://localhost:4000/rides', {});
+        const response = await axios.post('http://localhost:4000/ridesDummy', {});
         const freeRides = response.data.filter(ride => ride.status === 'Free');
         setVehicles(freeRides);
       } catch (error) {
