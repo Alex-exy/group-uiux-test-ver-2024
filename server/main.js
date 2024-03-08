@@ -14,23 +14,6 @@ const mongoURI = 'mongodb://localhost:27027/RideManager';
 const client = new MongoClient(mongoURI);
 
 async function main() {
-    try {
-        // Connect the client to the server
-        await client.connect();
-        console.log("Connected successfully to MongoDB");
-
-        const db = client.db('RideManager');
-        const ridesCollection = db.collection('rides');
-
-        // Endpoint to get all Rides
-        app.post('/rides', async (req, res) => {
-            try {
-                const rides = await ridesCollection.find({}).toArray();
-                res.json(rides);
-            } catch (err) {
-                res.status(500).json({ error: 'An error occurred while fetching rides', details: err });
-            }
-        });
         app.post('/ridesDummy', async (req, res) => {
             //try {
                 res.send('[{"_id":"65ea0ba4931607b3f3bade73","id":1,"type":"Car","distance":"10km","battery":"80%","info":"Electric","status":"Free"},{"_id":"65ea0ba4931607b3f3bade74","id":2,"type":"Bike","distance":"5km","battery":"60%","info":"Electric, Foldable","status":"Free"},{"_id":"65ea0ba4931607b3f3bade75","id":3,"type":"Scooter","distance":"3km","battery":"90%","info":"Electric","status":"Free"},{"_id":"65ea0e57931607b3f3bade76","id":1,"booker":"Alice Smith","destination":"Central Park","vehicleType":"Electric Car","battery":"85%","distanceToVehicle":"2km","departureTime":"14:00","status":"Share"},{"_id":"65ea0e57931607b3f3bade77","id":2,"booker":"Bob Johnson","destination":"Downtown","vehicleType":"Electric Scooter","battery":"70%","distanceToVehicle":"500m","departureTime":"15:30","status":"Share"}]');
@@ -38,11 +21,28 @@ async function main() {
                 //res.status(500).json({ error: 'An error occurred while fetching rides', details: err });
             //}
         });
+    //try {
+        //// Connect the client to the server
+        //await client.connect();
+        //console.log("Connected successfully to MongoDB");
 
-    } catch (err) {
-        console.error(err);
-        process.exit(1); // Exit the process in case of initial connection failure
-    }
+        //const db = client.db('RideManager');
+        //const ridesCollection = db.collection('rides');
+
+        //// Endpoint to get all Rides
+        //app.post('/rides', async (req, res) => {
+            //try {
+                //const rides = await ridesCollection.find({}).toArray();
+                //res.json(rides);
+            //} catch (err) {
+                //res.status(500).json({ error: 'An error occurred while fetching rides', details: err });
+            //}
+        //});
+
+    //} catch (err) {
+        //console.error(err);
+        //process.exit(1); // Exit the process in case of initial connection failure
+    //}
 }
 
 app.listen(port, () => {

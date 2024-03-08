@@ -10,7 +10,7 @@ const JoinARide = () => {
   useEffect(() => {
     const fetchRides = async () => {
       try {
-        const response = await axios.post('http://localhost:4000/rides', {});
+        const response = await axios.post('http://localhost:4000/ridesDummy', {});
         const sharedRides = response.data.filter(ride => ride.status === 'Share');
         setRides(sharedRides);
       } catch (error) {
