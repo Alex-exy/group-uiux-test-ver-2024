@@ -3,6 +3,7 @@ import './App.css';
 import '@coreui/coreui/dist/css/coreui.min.css'
 import { CContainer } from '@coreui/react';
 import NavBar from './components/NavBar';
+import LoginButton from './components/LoginButton/LoginButton';
 
 function App() {
   return (

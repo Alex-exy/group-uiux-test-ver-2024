@@ -6,9 +6,10 @@ import { CNavbar, CContainer, CNavbarBrand, CNavbarToggler, CCollapse, CNavItem,
 
 // login button 
 import LoginButton from "./LoginButton/LoginButton";
-import JoinRide from "./JoinRide/JoinRide";
+import JoinARide from './JoinARide/JoinARide';
+import Confirmation from './Confirmation/Confirmation';
 
-
+// ----------------------------------------------------
 const ReserveARide = () => {
   const [vehicles, setVehicles] = useState([]);
   const [selectedRide, setSelectedRide] = useState({});
@@ -139,16 +140,16 @@ const ReserveARide = () => {
 const Pricing = () => <div>Pricing</div>;
 const PastRides = () => <div>Past Rides</div>;
 
+// -------------------------------------------------------
+
 function NavBar() {
   const [visible, setVisible] = useState(false);
 
   // login button
   const [loggedIn, setLogin] = useState(false);
-  const [isLoading, setLoading] = useState(false);
 
   // login button 
   const handleLogin = () => {
-    setLoading(true);
     setTimeout(() => {
       setLogin(!loggedIn);
     }, []);
@@ -191,7 +192,6 @@ function NavBar() {
                   <LoginButton>
                     value={loggedIn}
                     handleLogin={handleLogin}
-                    isLoading={isLoading}
                     displayTrue={"Logout"}
                     displayFalse={"Login"}
                   </LoginButton>
@@ -204,9 +204,11 @@ function NavBar() {
         {/* Define Routes */}
         <Routes>
           <Route path="/reserve-a-ride" element={<ReserveARide />} />
-          <Route path="/join-a-ride" element={<JoinRide />} />
+          <Route path="/join-a-ride" element={<JoinARide />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/past-rides" element={<PastRides />} />
+          <Route path="/joiningRide/:id/:type" element={<Confirmation />} />
+          <Route path="*" element={<h4 className='error'> Page not existent </h4>} />
         </Routes>
       </>
     </Router>
@@ -214,4 +216,3 @@ function NavBar() {
 }
 
 export default NavBar;
-

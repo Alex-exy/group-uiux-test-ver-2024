@@ -7,11 +7,9 @@ const LoginButton = ({
     displayFalse,
 }) => {
     return (
-        <>
-            <button className="login" onClick={handleLogin}>
-                {value ? displayTrue : displayFalse}
-            </button>
-        </>
+        <button className="login" onClick={handleLogin}>
+            {value ? displayTrue : displayFalse}
+        </button>
     );
 }
 
