@@ -18,22 +18,26 @@ const Confirmation = () => {
     }
 
     return (
-        <div>
-            <h2> Please Confirm Your Joining Of The Ride </h2>
+        <div align="center" style={{ background: "skyblue", padding: "30px" }}>
+            <h2 align="center">
+                Please confirm your joining of the ride:
+            </h2>
+            <div align="center" style={{ padding: "10px", fontWeight: "bold" }}>
+                - - - Summary details of the selected ride - - -
+            </div>
             <button className="confirmButton" onClick={handleApproveModal}>
                 Confirm Joining
             </button>
-
-            <button className="cancleButton" onClick={handleCancleModal}>
+            <button className="cancelButton" onClick={handleCancleModal}>
                 Cancel Joining
             </button>
 
 
             <CModal visible={showApproveModal} onClose={() => setShowApproveModal(false)}>
                 <CModalHeader>
-                    <CModalTitle>Joining Approved</CModalTitle>
+                    <CModalTitle>Joining Approved! </CModalTitle>
                 </CModalHeader>
-                <CModalBody> You will be redirected to the Joining page </CModalBody>
+                <CModalBody> You will be redirected back to the Join-a-Ride page . . . </CModalBody>
                 <CModalFooter>
                     <Link to={`/join-a-ride`}>
                         <CButton color="primary" onClick={() => setShowApproveModal(false)}>Ok</CButton>
@@ -43,9 +47,9 @@ const Confirmation = () => {
 
             <CModal visible={showCancleModal} onClose={() => setShowCancleModal(false)}>
                 <CModalHeader>
-                    <CModalTitle>Joining Canceled</CModalTitle>
+                    <CModalTitle>Joining Canceled! </CModalTitle>
                 </CModalHeader>
-                <CModalBody> You will be redirected to the Joining page </CModalBody>
+                <CModalBody> You will be redirected back to the Join-a-Ride page . . . </CModalBody>
                 <CModalFooter>
                     <Link to={`/join-a-ride`}>
                         <CButton color="primary" onClick={() => setShowCancleModal(false)}>Ok</CButton>

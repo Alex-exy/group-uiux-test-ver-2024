@@ -2,12 +2,14 @@ import "./JoinARide.css";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { CNavbar, CContainer, CNavbarBrand, CNavbarToggler, CCollapse, CNavItem, CNavbarNav, CTable, CTableBody, CTableDataCell, CTableHead, CTableHeaderCell, CTableRow, CModal, CModalHeader, CModalTitle, CModalBody, CModalFooter, CButton, CFormInput } from '@coreui/react';
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
 const JoinARide = ({ isLoggedIn }) => {
     const [availableRides, setAvailableRides] = useState([]);
     const [loginInfo, setLoginInfo] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchAvailableRides = async () => {
@@ -24,19 +26,18 @@ const JoinARide = ({ isLoggedIn }) => {
         fetchAvailableRides();
     }, []);
 
-    const handleSelection = (rideid => {
+    const handleSelection = (rideid) => {
 
-        // DO SOMETHING 
+        navigate(`/confirm-joining/${rideid}/Confirm`);
 
-        if (isLoggedIn) {
-            <Link to={`/confirm-joining/${rideid}/Confirm`}>
+        /*
+        if (isLoggedIn == true) {
 
-            </Link>
         } else {
             handleLoginInfo();
         }
-
-    })
+        */
+    }
 
     const handleLoginInfo = () => {
         setLoginInfo(true)

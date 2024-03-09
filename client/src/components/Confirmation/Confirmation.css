@@ -1,17 +1,26 @@
-.Comfirmation {
-    background-color: #ffffff;
-    border: none;
-    color: black;
-    padding: 10px 30px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    cursor: pointer;
-    width: 100px;
-  }
-  
-  .confirmation:hover {
-    background-color: rgb(0, 0, 0);
-    color: rgb(255, 255, 255);
-  }
+.confirmButton {
+  background-color: white;
+  padding: 20px 20px;
+  border-width: 2px;
+  border: black;
+  margin-right: 20px;
+}
+
+.cancelButton {
+  background-color: white;
+  padding: 20px 20px;
+  border-width: 2px;
+  border: black;
+  margin-right: 20px;
+}
+
+
+.confirmButton:hover {
+  background-color: rgb(173, 255, 177);
+  color: rgb(0, 0, 0);
+}
+
+.cancelButton:hover {
+  background-color: rgb(255, 157, 157);
+  color: rgb(0, 0, 0);
+}
