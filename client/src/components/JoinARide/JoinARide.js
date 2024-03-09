@@ -27,7 +27,7 @@ const JoinARide = ({ isLoggedIn }) => {
     const handleSelection = (rideid => {
 
         // DO SOMETHING 
-        
+
         if (isLoggedIn) {
             <Link to={`/confirm-joining/${rideid}/Confirm`}>
 
@@ -44,8 +44,12 @@ const JoinARide = ({ isLoggedIn }) => {
 
     return (
         <div>
-            <h2>Join a Ride</h2>
-            <h2>Please click on the ride you want to join </h2>
+            <h2 align="center">
+                Join a Ride
+            </h2>
+            <h4>
+                Please click on the ride you want to join:
+            </h4>
             <CTable hover responsive>
                 <CTableHead>
                     <CTableRow>

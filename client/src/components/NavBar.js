@@ -191,24 +191,27 @@ function NavBar() {
                     Past Rides
                   </NavLink>
                 </CNavItem>
-                <CNavItem>
-                  <LoginButton
-                    value={loggedIn}
-                    handleLogin={handleLogin}
-                    isLoading={isLoading}
-                    displayTrue={"Logout"}
-                    displayFalse={"Login"} />
-                </CNavItem>
               </CNavbarNav>
             </CCollapse>
           </CContainer>
         </CNavbar>
+        <p align="right" style={{ background:"lightgrey"}}>
+          <LoginButton
+            value={loggedIn}
+            handleLogin={handleLogin}
+            isLoading={isLoading}
+            displayTrue={"Logout"}
+            displayFalse={"Login"}
+          />
+        </p>
+
 
         {/* Define Routes */}
         <Routes>
           <Route path="/" element={<JoinARide />} />
           <Route path="/reserve-a-ride" element={<ReserveARide />} />
-          <Route path="/join-a-ride" element={<JoinARide />} />
+          {/* is loading missing */}
+          <Route path="/join-a-ride" element={<JoinARide isLoggedIn={loggedIn} />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/past-rides" element={<PastRides />} />
           <Route path="/confirm-joining/:id/:type" element={<Confirmation />} />
