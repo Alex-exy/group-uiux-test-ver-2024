@@ -33,6 +33,7 @@ const ReserveARide = () => {
     fetchRides();
   }, []);
 
+
   const handleRowClick = (vehicle) => {
     setSelectedRide(vehicle);
     setShowModal(true);
@@ -145,15 +146,17 @@ const PastRides = () => <div>Past Rides</div>;
 function NavBar() {
   const [visible, setVisible] = useState(false);
 
-  // login button
+  //Login Test
   const [loggedIn, setLogin] = useState(false);
-
-  // login button 
+  const [isLoading, setLoading] = useState(false);
+  //Loading
   const handleLogin = () => {
+    setLoading(true);
     setTimeout(() => {
       setLogin(!loggedIn);
-    }, []);
-  };
+      setLoading(false);
+    }, 1000)
+  }
 
   return (
     <Router>
@@ -189,12 +192,12 @@ function NavBar() {
                   </NavLink>
                 </CNavItem>
                 <CNavItem>
-                  <LoginButton>
+                  <LoginButton
                     value={loggedIn}
                     handleLogin={handleLogin}
+                    isLoading={isLoading}
                     displayTrue={"Logout"}
-                    displayFalse={"Login"}
-                  </LoginButton>
+                    displayFalse={"Login"} />
                 </CNavItem>
               </CNavbarNav>
             </CCollapse>
@@ -203,11 +206,12 @@ function NavBar() {
 
         {/* Define Routes */}
         <Routes>
+          <Route path="/" element={<JoinARide />} />
           <Route path="/reserve-a-ride" element={<ReserveARide />} />
           <Route path="/join-a-ride" element={<JoinARide />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/past-rides" element={<PastRides />} />
-          <Route path="/joiningRide/:id/:type" element={<Confirmation />} />
+          <Route path="/confirm-joining/:id/:type" element={<Confirmation />} />
           <Route path="*" element={<h4 className='error'> Page not existent </h4>} />
         </Routes>
       </>

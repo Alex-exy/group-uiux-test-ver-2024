@@ -1,13 +1,13 @@
 import "./JoinARide.css";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { CTable, CTableBody, CTableDataCell, CTableHead, CTableHeaderCell, CTableRow } from '@coreui/react';
+import { CNavbar, CContainer, CNavbarBrand, CNavbarToggler, CCollapse, CNavItem, CNavbarNav, CTable, CTableBody, CTableDataCell, CTableHead, CTableHeaderCell, CTableRow, CModal, CModalHeader, CModalTitle, CModalBody, CModalFooter, CButton, CFormInput } from '@coreui/react';
 import { Link } from "react-router-dom";
 
 
-const JoinARide = ({ }) => {
+const JoinARide = ({ isLoggedIn }) => {
     const [availableRides, setAvailableRides] = useState([]);
-    //const [selection, setSelection] = useState('');
+    const [loginInfo, setLoginInfo] = useState(false);
 
     useEffect(() => {
         const fetchAvailableRides = async () => {
@@ -25,14 +25,27 @@ const JoinARide = ({ }) => {
     }, []);
 
     const handleSelection = (rideid => {
-        <Link to={`/confirm-joining/${rideid}/Confirm`}>
-        </Link>
+
+        // DO SOMETHING 
+        
+        if (isLoggedIn) {
+            <Link to={`/confirm-joining/${rideid}/Confirm`}>
+
+            </Link>
+        } else {
+            handleLoginInfo();
+        }
+
     })
+
+    const handleLoginInfo = () => {
+        setLoginInfo(true)
+    }
 
     return (
         <div>
             <h2>Join a Ride</h2>
-            <h2>Please click on the ride you want</h2>
+            <h2>Please click on the ride you want to join </h2>
             <CTable hover responsive>
                 <CTableHead>
                     <CTableRow>
@@ -69,7 +82,18 @@ const JoinARide = ({ }) => {
                     ))}
                 </CTableBody>
             </CTable>
+
+            <CModal visible={setLoginInfo} onClose={() => setLoginInfo(false)}>
+                <CModalHeader>
+                    <CModalTitle>Please login to join a ride</CModalTitle>
+                </CModalHeader>
+                <CModalFooter>
+                    <CButton color="primary" onClick={() => setLoginInfo(false)}>Ok</CButton>
+                </CModalFooter>
+            </CModal >
+
         </div >
+
     );
 };
 
