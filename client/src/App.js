@@ -7,7 +7,8 @@ import NavBar from './components/NavBar';
 function App() {
   return (
     <CContainer fluid className="mainContainer">
-      <NavBar />
+      <NavBar>
+      </ NavBar>
     </CContainer>
   );
 }

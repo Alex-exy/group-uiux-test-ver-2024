@@ -1,57 +1,12 @@
-import React, {useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from "axios";
 // Import necessary components and hooks from react-router-dom
 import { BrowserRouter as Router, Routes, Route, NavLink } from 'react-router-dom';
-import { CNavbar, CContainer, CNavbarBrand, CNavbarToggler, CCollapse, CNavItem, CNavbarNav,CTable, CTableBody, CTableDataCell, CTableHead, CTableHeaderCell, CTableRow,   CModal, CModalHeader, CModalTitle, CModalBody, CModalFooter, CButton, CFormInput} from '@coreui/react';
+import { CNavbar, CContainer, CNavbarBrand, CNavbarToggler, CCollapse, CNavItem, CNavbarNav, CTable, CTableBody, CTableDataCell, CTableHead, CTableHeaderCell, CTableRow, CModal, CModalHeader, CModalTitle, CModalBody, CModalFooter, CButton, CFormInput } from '@coreui/react';
 
-const JoinARide = () => {
-  const [rides, setRides] = useState([]);
-
-  useEffect(() => {
-    const fetchRides = async () => {
-      try {
-        const response = await axios.post('http://localhost:4000/ridesDummy', {});
-        const sharedRides = response.data.filter(ride => ride.status === 'Share');
-        setRides(sharedRides);
-      } catch (error) {
-        console.error('Failed to fetch rides for sharing:', error);
-      }
-    };
-
-    fetchRides();
-  }, []); // Empty dependency array means this effect runs once on mount
-
-  return (
-    <div>
-      <h2>Join a Ride</h2>
-      <CTable striped hover responsive>
-        <CTableHead>
-          <CTableRow>
-            <CTableHeaderCell>Booker</CTableHeaderCell>
-            <CTableHeaderCell>Destination</CTableHeaderCell>
-            <CTableHeaderCell>Vehicle Type</CTableHeaderCell>
-            <CTableHeaderCell>Battery Remaining</CTableHeaderCell>
-            <CTableHeaderCell>Distance to Vehicle</CTableHeaderCell>
-            <CTableHeaderCell>Departure Time</CTableHeaderCell>
-          </CTableRow>
-        </CTableHead>
-        <CTableBody>
-          {rides.map((ride) => (
-            <CTableRow key={ride.id}>
-              <CTableDataCell>{ride.booker}</CTableDataCell>
-              <CTableDataCell>{ride.destination}</CTableDataCell>
-              <CTableDataCell>{ride.vehicleType}</CTableDataCell>
-              <CTableDataCell>{ride.battery}</CTableDataCell>
-              <CTableDataCell>{ride.distanceToVehicle}</CTableDataCell>
-              <CTableDataCell>{ride.departureTime}</CTableDataCell>
-            </CTableRow>
-          ))}
-        </CTableBody>
-      </CTable>
-    </div>
-  );
-};
-
+// login button 
+import LoginButton from "./LoginButton/LoginButton";
+import JoinRide from "./JoinRide/JoinRide";
 
 
 const ReserveARide = () => {
@@ -187,6 +142,18 @@ const PastRides = () => <div>Past Rides</div>;
 function NavBar() {
   const [visible, setVisible] = useState(false);
 
+  // login button
+  const [loggedIn, setLogin] = useState(false);
+  const [isLoading, setLoading] = useState(false);
+
+  // login button 
+  const handleLogin = () => {
+    setLoading(true);
+    setTimeout(() => {
+      setLogin(!loggedIn);
+    }, []);
+  };
+
   return (
     <Router>
       <>
@@ -220,15 +187,24 @@ function NavBar() {
                     Past Rides
                   </NavLink>
                 </CNavItem>
+                <CNavItem>
+                  <LoginButton>
+                    value={loggedIn}
+                    handleLogin={handleLogin}
+                    isLoading={isLoading}
+                    displayTrue={"Logout"}
+                    displayFalse={"Login"}
+                  </LoginButton>
+                </CNavItem>
               </CNavbarNav>
-            </CCollapse>                                                                                                                                                                      
+            </CCollapse>
           </CContainer>
         </CNavbar>
 
         {/* Define Routes */}
         <Routes>
           <Route path="/reserve-a-ride" element={<ReserveARide />} />
-          <Route path="/join-a-ride" element={<JoinARide />} />
+          <Route path="/join-a-ride" element={<JoinRide />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/past-rides" element={<PastRides />} />
         </Routes>
