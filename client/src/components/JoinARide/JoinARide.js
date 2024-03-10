@@ -26,7 +26,7 @@ const JoinARide = ({ isLoggedIn }) => {
         fetchAvailableRides();
     }, []);
 
-    useEffect(() => { 
+    useEffect(() => {
 
     }, [isLoggedIn]);
 
@@ -36,18 +36,18 @@ const JoinARide = ({ isLoggedIn }) => {
         } else {
             handleLoginInfo();
         }
-    }
+    };
 
     const handleLoginInfo = () => {
         setLoginInfo(true)
-    }
+    };
 
     return (
         <div>
-            <h2 align="center">
+            <h2 align="center" style={{ padding: "30px" }}>
                 Join a Ride
             </h2>
-            <h4>
+            <h4 align="left" style={{ background: "lightgrey", padding: "20px" }}>
                 Please click on the ride you want to join:
             </h4>
             <CTable hover responsive>
