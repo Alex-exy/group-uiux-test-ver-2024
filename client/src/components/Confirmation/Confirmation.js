@@ -22,7 +22,7 @@ const Confirmation = () => {
             <h2 align="center">
                 Please confirm your joining of the ride:
             </h2>
-            <div align="center" style={{ padding: "10px", fontWeight: "bold" }}>
+            <div align="center" style={{ padding: "150px", fontWeight: "bold" }}>
                 - - - Summary details of the selected ride - - -
             </div>
             <button className="confirmButton" onClick={handleApproveModal}>

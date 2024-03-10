@@ -1,13 +1,13 @@
 .confirmButton {
-  background-color: white;
+  background-color: rgb(231, 231, 231);
   padding: 20px 20px;
   border-width: 2px;
   border: black;
-  margin-right: 20px;
+  margin-right: 100px;
 }
 
 .cancelButton {
-  background-color: white;
+  background-color: rgb(231, 231, 231);
   padding: 20px 20px;
   border-width: 2px;
   border: black;

@@ -211,7 +211,7 @@ function NavBar() {
           <Route path="/" element={<JoinARide />} />
           <Route path="/reserve-a-ride" element={<ReserveARide />} />
           {/* is loading missing */}
-          <Route path="/join-a-ride" element={<JoinARide isLoggedIn={loggedIn} />} />
+          <Route path="/join-a-ride" element={<JoinARide isLoggedIn={loggedIn}/>} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/past-rides" element={<PastRides />} />
           <Route path="/confirm-joining/:id/:type" element={<Confirmation />} />

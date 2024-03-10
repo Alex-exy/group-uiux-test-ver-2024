@@ -26,17 +26,16 @@ const JoinARide = ({ isLoggedIn }) => {
         fetchAvailableRides();
     }, []);
 
+    useEffect(() => { 
+
+    }, [isLoggedIn]);
+
     const handleSelection = (rideid) => {
-
-        navigate(`/confirm-joining/${rideid}/Confirm`);
-
-        /*
-        if (isLoggedIn == true) {
-
+        if (isLoggedIn) {
+            navigate(`/confirm-joining/${rideid}/Confirm`);
         } else {
             handleLoginInfo();
         }
-        */
     }
 
     const handleLoginInfo = () => {
@@ -88,9 +87,9 @@ const JoinARide = ({ isLoggedIn }) => {
                 </CTableBody>
             </CTable>
 
-            <CModal visible={setLoginInfo} onClose={() => setLoginInfo(false)}>
+            <CModal visible={loginInfo} onClose={() => setLoginInfo(false)}>
                 <CModalHeader>
-                    <CModalTitle>Please login to join a ride</CModalTitle>
+                    <CModalTitle>Please login to join a ride!</CModalTitle>
                 </CModalHeader>
                 <CModalFooter>
                     <CButton color="primary" onClick={() => setLoginInfo(false)}>Ok</CButton>
