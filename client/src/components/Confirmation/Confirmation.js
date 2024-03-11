@@ -2,7 +2,6 @@ import "./Confirmation.css";
 import { Link } from "react-router-dom";
 import { CModal, CModalHeader, CModalTitle, CModalBody, CModalFooter, CButton, CFormInput } from '@coreui/react';
 import React, { useState } from 'react';
-import JoinARide from "../JoinARide/JoinARide";
 
 const Confirmation = () => {
 

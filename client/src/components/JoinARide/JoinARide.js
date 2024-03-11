@@ -7,12 +7,15 @@ import { useNavigate } from "react-router-dom";
 const JoinARide = ({ isLoggedIn }) => {
     const [availableRides, setAvailableRides] = useState([]);
     const [loginInfo, setLoginInfo] = useState(false);
-    const [selectedRideInfo, setSelectedRideInfo] = useState ({
+
+    //FIX
+    const [selectedRideInfo, setSelectedRideInfo] = useState({
         name: '',
         dest: '',
         time: '',
     });
-        const navigate = useNavigate();
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchAvailableRides = async () => {
@@ -29,7 +32,7 @@ const JoinARide = ({ isLoggedIn }) => {
     }, []);
 
 
-    // ERROR
+    // ERROR - will be replaced 
     useEffect(() => {
     }, [isLoggedIn]);
 
