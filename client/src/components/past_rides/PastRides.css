@@ -1,0 +1,21 @@
+.cModal {
+    text-align: center;
+  }
+
+@media print {
+    body > *:not(.c-modal) {
+      display: none ;
+    }
+    .print-button, .go-back-button {
+      display: none !important;
+    }
+  }
+
+  .modalTitle {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .centered {
+    align-self: center;
+  }

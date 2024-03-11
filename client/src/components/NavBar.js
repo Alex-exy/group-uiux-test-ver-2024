@@ -1,4 +1,5 @@
 import React, {useEffect, useState } from 'react';
+import PastRides from "./past_rides/PastRides"
 import axios from "axios";
 // Import necessary components and hooks from react-router-dom
 import { BrowserRouter as Router, Routes, Route, NavLink } from 'react-router-dom';
@@ -182,7 +183,6 @@ const ReserveARide = () => {
   );
 };
 const Pricing = () => <div>Pricing</div>;
-const PastRides = () => <div>Past Rides</div>;
 
 function NavBar() {
   const [visible, setVisible] = useState(false);
