@@ -1,8 +1,8 @@
 .loader,
 .loader:after {
   border-radius: 50%;
-  width: 7em;
-  height: 7em;
+  width: 8em;
+  height: 8em;
 }
 .loader {
   margin: auto auto;
@@ -42,5 +42,5 @@
   font-size: 8px;
 }
 .loader_Login {
-  font-size: 2px;
+  font-size: 3px;
 }

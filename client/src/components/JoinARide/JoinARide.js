@@ -2,9 +2,7 @@ import "./JoinARide.css";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { CNavbar, CContainer, CNavbarBrand, CNavbarToggler, CCollapse, CNavItem, CNavbarNav, CTable, CTableBody, CTableDataCell, CTableHead, CTableHeaderCell, CTableRow, CModal, CModalHeader, CModalTitle, CModalBody, CModalFooter, CButton, CFormInput } from '@coreui/react';
-import { Link, Navigate } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-
 
 const JoinARide = ({ isLoggedIn }) => {
     const [availableRides, setAvailableRides] = useState([]);
@@ -14,7 +12,6 @@ const JoinARide = ({ isLoggedIn }) => {
     useEffect(() => {
         const fetchAvailableRides = async () => {
             try {
-                //const response = await axios.post('http:://localhost:27027/ridesDummy', {});
                 const response = await axios.post('http://localhost:4000/ridesDummy', {});
                 const joinableRides = response.data.filter(ride => ride.status === 'Share');
                 setAvailableRides(joinableRides);
@@ -27,7 +24,6 @@ const JoinARide = ({ isLoggedIn }) => {
     }, []);
 
     useEffect(() => {
-
     }, [isLoggedIn]);
 
     const handleSelection = (rideid) => {
@@ -43,11 +39,11 @@ const JoinARide = ({ isLoggedIn }) => {
     };
 
     return (
-        <div>
-            <h2 align="center" style={{ padding: "30px" }}>
+        <div className="background">
+            <h2 className="header" >
                 Join a Ride
             </h2>
-            <h4 align="left" style={{ background: "lightgrey", padding: "20px" }}>
+            <h4 className="description" >
                 Please click on the ride you want to join:
             </h4>
             <CTable hover responsive>
@@ -95,9 +91,7 @@ const JoinARide = ({ isLoggedIn }) => {
                     <CButton color="primary" onClick={() => setLoginInfo(false)}>Ok</CButton>
                 </CModalFooter>
             </CModal >
-
         </div >
-
     );
 };
 

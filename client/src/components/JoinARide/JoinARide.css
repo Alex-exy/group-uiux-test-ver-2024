@@ -1,0 +1,22 @@
+.background {
+    background-color: lightgray;
+    padding: 20px 20px;
+    text-align: center;
+    border-radius: 20px;
+    margin: 20px 20px;
+}
+
+.header {
+    text-align: left;
+    text-indent: 20px;
+    padding: 20px 20px;
+    font-weight: bold;
+    font-size: x-large;
+    border-radius: 10px 10px;
+}
+
+.description {
+    text-align: center;
+    padding: 30px 30px;
+    font-weight: light;
+}

@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { CModal, CModalHeader, CModalTitle, CModalBody, CModalFooter, CButton, CFormInput } from '@coreui/react';
 import React, { useState } from 'react';
 
-
 const Confirmation = () => {
 
     const [showApproveModal, setShowApproveModal] = useState(false);
@@ -18,11 +17,11 @@ const Confirmation = () => {
     }
 
     return (
-        <div align="center" style={{ background: "skyblue", padding: "30px" }}>
-            <h2 align="center">
+        <div className="background" >
+            <h2 className="header">
                 Please confirm your joining of the ride:
             </h2>
-            <div align="center" style={{ padding: "150px", fontWeight: "bold" }}>
+            <div className="summary" >
                 - - - Summary details of the selected ride - - -
             </div>
             <button className="confirmButton" onClick={handleApproveModal}>
@@ -31,7 +30,6 @@ const Confirmation = () => {
             <button className="cancelButton" onClick={handleCancleModal}>
                 Cancel Joining
             </button>
-
 
             <CModal visible={showApproveModal} onClose={() => setShowApproveModal(false)}>
                 <CModalHeader>
@@ -56,7 +54,6 @@ const Confirmation = () => {
                     </Link>
                 </CModalFooter>
             </CModal >
-
         </div >
     );
 };
