@@ -1,12 +1,12 @@
-import { CTable } from "@coreui/react";
 import JoinARide from "./JoinARide";
+import { CTable } from "@coreui/react";
+import { shallow, mount } from "enzyme";
 
 //FIX
 const clickOnRow = (wrapper) => {
     let row = wrapper.find(".CTableRow")
     row.simulate("click");
 }
-
 
 describe('Render DOM elements correctly', () => {
     let wrapper = null;

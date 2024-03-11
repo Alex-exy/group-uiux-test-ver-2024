@@ -1,4 +1,5 @@
 import Confirmation from "./Confirmation";
+import { shallow, mount } from "enzyme";
 
 const pressConfirm = (wrapper) => {
     let confirmButton = wrapper.find(".confirmButton")
