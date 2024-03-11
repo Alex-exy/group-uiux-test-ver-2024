@@ -10,7 +10,7 @@ const pressCancel = (wrapper) => {
     cancel.simulate("click");
 }
 
-describe('Render DOM elements correctly', () => {
+describe('Renders DOM elements correctly', () => {
     let wrapper = null;
 
     beforeEach(() => {
@@ -102,7 +102,7 @@ describe('Check Cancel CModal', () => {
     });
 })
 
-describe('Check Button clicking actions'), () => {
+describe('Check Button clicking actions', () => {
     let wrapper = null;
 
     beforeEach(() => {
@@ -111,16 +111,16 @@ describe('Check Button clicking actions'), () => {
 
     //FIX 
 
-    it("Confirm Button should set showApprovedModal true"), () => {
+    it("Confirm Button should set showApprovedModal true", () => {
         let showApprove = wrapper.find(showApproveModal);
         pressConfirm(wrapper);
         expect(showApprove.showApproveModal).toBe(true);
-    }
+    })
 
-    it("Cancle Button should set showCancleModal true"), () => {
+    it("Cancle Button should set showCancleModal true", () => {
         let showCancel = wrapper.find(showCancelModal);
         pressCancel(wrapper);
-        expect(chowCancel.showCancelModal).toBe(true);
-    }
-}
+        expect(showCancel.showCancelModal).toBe(true);
+    })
+})
 

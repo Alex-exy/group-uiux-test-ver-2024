@@ -1,3 +1,4 @@
+/*
 import "./LoginButton.css";
 import Loader from "../Loader/Loader";
 
@@ -28,3 +29,4 @@ const LoginButton = ({
 }
 
 export default LoginButton;
+*/
