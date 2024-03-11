@@ -7,7 +7,12 @@ import { useNavigate } from "react-router-dom";
 const JoinARide = ({ isLoggedIn }) => {
     const [availableRides, setAvailableRides] = useState([]);
     const [loginInfo, setLoginInfo] = useState(false);
-    const navigate = useNavigate();
+    const [selectedRideInfo, setSelectedRideInfo] = useState ({
+        name: '',
+        dest: '',
+        time: '',
+    });
+        const navigate = useNavigate();
 
     useEffect(() => {
         const fetchAvailableRides = async () => {
@@ -23,11 +28,19 @@ const JoinARide = ({ isLoggedIn }) => {
         fetchAvailableRides();
     }, []);
 
+
+    // ERROR
     useEffect(() => {
     }, [isLoggedIn]);
 
-    const handleSelection = (rideid) => {
+
+    const handleSelection = (rideid, ridename, ridedestination, ridedeparturetime) => {
         if (isLoggedIn) {
+            setSelectedRideInfo({
+                name: ridename,
+                dest: ridedestination,
+                time: ridedeparturetime,
+            })
             navigate(`/confirm-joining/${rideid}/Confirm`);
         } else {
             handleLoginInfo();
@@ -59,7 +72,7 @@ const JoinARide = ({ isLoggedIn }) => {
                 </CTableHead>
                 <CTableBody>
                     {availableRides.map((ride) => (
-                        <CTableRow key={ride.id} onClick={() => handleSelection(ride.id)}>
+                        <CTableRow key={ride.id} onClick={() => handleSelection(ride.id, ride.booker, ride.destination, ride.departureTime)}>
                             <CTableDataCell>
                                 {ride.booker}
                             </CTableDataCell>

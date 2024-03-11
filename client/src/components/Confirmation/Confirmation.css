@@ -15,10 +15,35 @@
   border-radius: 10px 10px;
 }
 
-.summary {
+.description {
   text-align: center;
-  padding: 30px 30px;
+  font-weight: bold;
+  font-size: x-large;
+  padding: 20px;
   font-weight: light;
+}
+
+.detailList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background-color: white;
+  padding: 20px;
+  border-radius: 20px;
+  margin: 40px auto;
+  max-width: 400px;
+}
+
+.detName,
+.detDest,
+.detTime {
+  border: 1px solid black;
+  border-radius: 10px;
+  width: 100%;
+  text-align: left;
+  padding: 10px 20px;
+  margin-bottom: 10px;
 }
 
 .confirmButton {
@@ -28,6 +53,7 @@
   border: 1px solid black;
   border-radius: 10px 10px;
   margin-right: 20px;
+  margin-bottom: 30px;
 }
 
 .cancelButton {
@@ -37,6 +63,7 @@
   border: 1px solid black;
   border-radius: 10px 10px;
   margin-left: 20px;
+  margin-bottom: 30px;
 }
 
 .confirmButton:hover {

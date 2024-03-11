@@ -2,6 +2,7 @@ import "./Confirmation.css";
 import { Link } from "react-router-dom";
 import { CModal, CModalHeader, CModalTitle, CModalBody, CModalFooter, CButton, CFormInput } from '@coreui/react';
 import React, { useState } from 'react';
+import JoinARide from "../JoinARide/JoinARide";
 
 const Confirmation = () => {
 
@@ -21,9 +22,14 @@ const Confirmation = () => {
             <h2 className="header">
                 Please confirm your joining of the ride:
             </h2>
-            <div className="summary" >
-                - - - Summary details of the selected ride - - -
+            <div className="description" >
+                Summarized details of the selected ride:
             </div>
+            <div className="detailList">
+                <p className="detName"> Booker: </p>
+                <p className="detDest"> To: </p>
+                <p className="detTime"> Leaves at: </p>
+            </div >
             <button className="confirmButton" onClick={handleApproveModal}>
                 Confirm Joining
             </button>
