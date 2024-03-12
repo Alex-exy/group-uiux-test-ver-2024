@@ -3,14 +3,17 @@ import { CButton, CTable, CTableBody, CTableDataCell, CTableHead, CTableHeaderCe
           CModal, CModalHeader, CModalTitle, CModalBody, CModalFooter } from '@coreui/react';
 import { rides } from './ridesData'; 
 import './PastRides.css';
-const currentUser = "John";
+import {useSelector} from 'react-redux';
+//const currentUser = "John";
 
 const PastRides = () => {
+  const currentUser=useSelector((state)=>state.auth.user);
+  console.log(currentUser);
   const [showModal, setShowModal] = useState(false);
   const [selectedRide, setSelectedRide] = useState(null);
 
   
-  const usersRides = rides.filter(ride => ride.person === currentUser);
+  const usersRides = rides.filter(ride => ride.person === currentUser.given_name);
 
   const handleRowClick = (ride) => {
     setSelectedRide(ride); 

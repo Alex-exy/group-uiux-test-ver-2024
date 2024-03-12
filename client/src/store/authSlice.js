@@ -5,14 +5,15 @@ export const authSlice = createSlice({
   name: 'auth',
   initialState: {
     isAuthenticated: false,
-    user: null, // Add this line to hold the userId
+    user: {}, // Add this line to hold the userId
   },
   reducers: {
     setAuthenticated: (state, action) => {
       state.isAuthenticated = action.payload;
     },
     setUser: (state, action) => { // Add a reducer to set the userId
-      state.userId = action.payload;
+      state.user = action.payload;
+      console.log(action.payload);
     },
   },
 });
