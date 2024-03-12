@@ -3,7 +3,7 @@ import './App.css';
 import '@coreui/coreui/dist/css/coreui.min.css';
 import { CContainer } from '@coreui/react';
 import NavBar from './components/NavBar';
-import LoginButton from './components/LoginButton/LoginButton';
+//import LoginButton from './components/LoginButton/LoginButton';
 import { useSelector, useDispatch } from 'react-redux';
 import { setUser } from './store/authSlice';
 

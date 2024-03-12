@@ -1,16 +1,20 @@
 import "./JoinARide.css";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { CNavbar, CContainer, CNavbarBrand, CNavbarToggler, CCollapse, CNavItem, CNavbarNav, CTable, CTableBody, CTableDataCell, CTableHead, CTableHeaderCell, CTableRow, CModal, CModalHeader, CModalTitle, CModalBody, CModalFooter, CButton, CFormInput } from '@coreui/react';
+import { CTable, CTableBody, CTableDataCell, CTableHead, CTableHeaderCell, CTableRow, CModal, CModalHeader, CModalTitle,CModalFooter, CButton} from '@coreui/react';
 import { useNavigate } from "react-router-dom";
+import {useDispatch} from "react-redux";
+import { setSelectedRide } from '../../store/rideSlice';
+
 
 const JoinARide = ({ isLoggedIn }) => {
     const [availableRides, setAvailableRides] = useState([]);
     const [loginInfo, setLoginInfo] = useState(false);
-    const [selectedRide, setSelectedRide] = useState(null)
+    //const [selectedRide, setSelectedRide] = useState(null)
 
     const navigate = useNavigate();
 
+    const dispatch=useDispatch();
     useEffect(() => {
         const fetchAvailableRides = async () => {
             try {
@@ -26,20 +30,21 @@ const JoinARide = ({ isLoggedIn }) => {
     }, []);
 
 
-    // Will be replaced 
-    useEffect(() => {
-    }, [isLoggedIn]);
+    //// Will be replaced 
+    //useEffect(() => {
+    //}, [isLoggedIn]);
 
 
     const handleSelection = (ride) => {
 
-        setSelectedRide(ride);
+        //setSelectedRide(ride);
+        dispatch(setSelectedRide(ride));
 
-        if (isLoggedIn) {
+        //if (isLoggedIn) {
             navigate(`/confirm-joining/${ride.id}/Confirm`);
-        } else {
-            handleLoginInfo();
-        }
+        //} else {
+            //handleLoginInfo();
+        //}
     };
 
     const handleLoginInfo = () => {

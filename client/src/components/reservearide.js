@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from "axios";
-import { CNavbar, CContainer, CNavbarBrand, CNavbarToggler, CCollapse, CNavItem, CNavbarNav,CTable, CTableBody, CTableDataCell, CTableHead, CTableHeaderCell, CTableRow,   CModal, CModalHeader, CModalTitle, CModalBody, CModalFooter, CButton, CFormInput} from '@coreui/react';
+import { CTable, CTableBody, CTableDataCell, CTableHead, CTableHeaderCell, CTableRow,   CModal, CModalHeader, CModalTitle, CModalBody, CModalFooter, CButton, CFormInput} from '@coreui/react';
 
 
 // Start backend in 2nd Terminal: node main.js

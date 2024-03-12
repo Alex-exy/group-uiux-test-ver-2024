@@ -1,11 +1,14 @@
 import "./Confirmation.css";
 import { Link } from "react-router-dom";
-import { CModal, CModalHeader, CModalTitle, CModalBody, CModalFooter, CButton, CFormInput } from '@coreui/react';
+import { CModal, CModalHeader, CModalTitle, CModalBody, CModalFooter, CButton} from '@coreui/react';
 import React, { useState } from 'react';
-import {selectedRide} from "../JoinARide/JoinARide";
+//import {selectedRide} from "../JoinARide/JoinARide";
+import {useSelector} from 'react-redux';
 
 const Confirmation = () => {
 
+
+    const selectedRide = useSelector((state) => state.ride.selectedRide); 
     console.log(selectedRide.booker);
 
     const [showApproveModal, setShowApproveModal] = useState(false);
@@ -28,7 +31,7 @@ const Confirmation = () => {
                 Summarized details of the selected ride:
             </div>
             <div className="detailList">
-                <p className="detName"> Booker: </p>
+                <p className="detName"> Booker: {selectedRide.booker}</p>
                 <p className="detDest"> To:</p>
                 <p className="detTime"> Leaves at:  </p>
             </div >
