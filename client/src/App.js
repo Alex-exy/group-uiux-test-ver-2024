@@ -4,7 +4,7 @@ import '@coreui/coreui/dist/css/coreui.min.css';
 import { CContainer } from '@coreui/react';
 import NavBar from './components/NavBar';
 import { useSelector, useDispatch } from 'react-redux';
-import { setUserId } from './store/authSlice';
+import { setUser } from './store/authSlice';
 
 function App({ keycloak }) {
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
