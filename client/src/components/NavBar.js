@@ -1,9 +1,62 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState } from 'react';
+import PastRides from "./past_rides/PastRides"
 import axios from "axios";
 
 // Import necessary components and hooks from react-router-dom
 import { BrowserRouter as Router, Routes, Route, NavLink } from 'react-router-dom';
-import { CNavbar, CContainer, CNavbarBrand, CNavbarToggler, CCollapse, CNavItem, CNavbarNav, CTable, CTableBody, CTableDataCell, CTableHead, CTableHeaderCell, CTableRow, CModal, CModalHeader, CModalTitle, CModalBody, CModalFooter, CButton, CFormInput } from '@coreui/react';
+import { CNavbar, CContainer, CNavbarBrand, CNavbarToggler, CCollapse, CNavItem, CNavbarNav,CTable, CTableBody, CTableDataCell, CTableHead, CTableHeaderCell, CTableRow,   CModal, CModalHeader, CModalTitle, CModalBody, CModalFooter, CButton, CFormInput} from '@coreui/react';
+import Profile from './Profile';
+import userProfile from './john_doe.jpeg';
+
+import ReserveARide from './reservearide';
+
+const JoinARide = () => {
+  const [rides, setRides] = useState([]);
+
+  useEffect(() => {
+    const fetchRides = async () => {
+      try {
+        const response = await axios.post('http://localhost:4000/ridesDummy', {});
+        const sharedRides = response.data.filter(ride => ride.status === 'Share');
+        setRides(sharedRides);
+      } catch (error) {
+        console.error('Failed to fetch rides for sharing:', error);
+      }
+    };
+
+    fetchRides();
+  }, []); // Empty dependency array means this effect runs once on mount
+
+  return (
+    <div>
+      <h2>Join a Ride</h2>
+      <CTable striped hover responsive>
+        <CTableHead>
+          <CTableRow>
+            <CTableHeaderCell>Booker</CTableHeaderCell>
+            <CTableHeaderCell>Destination</CTableHeaderCell>
+            <CTableHeaderCell>Vehicle Type</CTableHeaderCell>
+            <CTableHeaderCell>Battery Remaining</CTableHeaderCell>
+            <CTableHeaderCell>Distance to Vehicle</CTableHeaderCell>
+            <CTableHeaderCell>Departure Time</CTableHeaderCell>
+          </CTableRow>
+        </CTableHead>
+        <CTableBody>
+          {rides.map((ride) => (
+            <CTableRow key={ride.id}>
+              <CTableDataCell>{ride.booker}</CTableDataCell>
+              <CTableDataCell>{ride.destination}</CTableDataCell>
+              <CTableDataCell>{ride.vehicleType}</CTableDataCell>
+              <CTableDataCell>{ride.battery}</CTableDataCell>
+              <CTableDataCell>{ride.distanceToVehicle}</CTableDataCell>
+              <CTableDataCell>{ride.departureTime}</CTableDataCell>
+            </CTableRow>
+          ))}
+        </CTableBody>
+      </CTable>
+    </div>
+  );
+};
 
 // login button 
 import LoginButton from "./LoginButton/LoginButton";
@@ -139,8 +192,8 @@ const ReserveARide = () => {
     </div>
   );
 };
+
 const Pricing = () => <div>Pricing</div>;
-const PastRides = () => <div>Past Rides</div>;
 
 // -------------------------------------------------------
 
@@ -193,7 +246,18 @@ function NavBar() {
                   </NavLink>
                 </CNavItem>
               </CNavbarNav>
-            </CCollapse>
+          <CNavbarNav className="ms-auto">
+            <CNavItem>
+              <NavLink to="/profile" className="nav-link">
+                <img
+                  src={userProfile} // Replace with your profile image path
+                  alt="Profile"
+                  style={{ width: '40px', height: '40px', borderRadius: '50%' }}
+                />
+              </NavLink>
+            </CNavItem>
+          </CNavbarNav>
+            </CCollapse>                                                                                                                                                                      
           </CContainer>
         </CNavbar>
         <p align="right" style={{ background:"lightgrey"}}>
@@ -216,6 +280,7 @@ function NavBar() {
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/past-rides" element={<PastRides />} />
           <Route path="/confirm-joining/:id/:type" element={<Confirmation />} />
+          <Route path="/profile" element={<Profile />} />
           <Route path="*" element={<h4 className='error'> Page not existent </h4>} />
         </Routes>
       </>
