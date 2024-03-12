@@ -3,6 +3,10 @@ import JoinARide from "./JoinARide";
 import { CTable } from "@coreui/react";
 import { shallow, mount } from "enzyme";
 
+// experimental
+import Adapter from 'enzyme-adapter-react-15';
+EnzymeAdapter.configure({adapter: new Adapter() })
+
 //FIX
 const clickOnRow = (wrapper) => {
     let row = wrapper.find(".CTableRow")
@@ -13,7 +17,7 @@ describe('Render DOM elements correctly', () => {
     let wrapper = null;
 
     beforeEach(() => {
-        wrapper = shallow(<JoinARide />)
+        wrapper = mount(<JoinARide />)
     })
 
     //DOM Text Components

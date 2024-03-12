@@ -2,8 +2,11 @@ import "./Confirmation.css";
 import { Link } from "react-router-dom";
 import { CModal, CModalHeader, CModalTitle, CModalBody, CModalFooter, CButton, CFormInput } from '@coreui/react';
 import React, { useState } from 'react';
+import {selectedRide} from "../JoinARide/JoinARide";
 
 const Confirmation = () => {
+
+    console.log(selectedRide.booker);
 
     const [showApproveModal, setShowApproveModal] = useState(false);
     const [showCancleModal, setShowCancleModal] = useState(false);
@@ -26,8 +29,8 @@ const Confirmation = () => {
             </div>
             <div className="detailList">
                 <p className="detName"> Booker: </p>
-                <p className="detDest"> To: </p>
-                <p className="detTime"> Leaves at: </p>
+                <p className="detDest"> To:</p>
+                <p className="detTime"> Leaves at:  </p>
             </div >
             <button className="confirmButton" onClick={handleApproveModal}>
                 Confirm Joining

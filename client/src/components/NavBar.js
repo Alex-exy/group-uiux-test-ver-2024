@@ -64,7 +64,7 @@ const ReserveARide = () => {
 
     // Send rideInfo to backend
     const joinFlag = allowJoin ? 1 : 0;
-    axios.post('http://localhost:4000/confirmRide', { ...rideInfo, join: joinFlag })
+    fetch.post('http://localhost:4000/confirmRide', { ...rideInfo, join: joinFlag })
       .then(response => {
         console.log('Ride confirmed:', response.data);
         // Handle success (e.g., show confirmation message, reset form)
