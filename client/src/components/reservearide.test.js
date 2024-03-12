@@ -14,10 +14,6 @@ describe('ReserveARide Component', () => {
     );
   });
 
-  afterEach(() => {
-    wrapper.unmount();
-  });
-
   // Test 01
   it('is Rendered', () => {
     expect(wrapper.exists()).toBe(true);
@@ -51,5 +47,5 @@ describe('ReserveARide Component', () => {
     expect(wrapper.find('CModal').prop('visible')).toBe(true);
   });
 
-  // Add more tests as needed
+  // Add more tests
 });
