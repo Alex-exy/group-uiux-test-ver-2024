@@ -1,3 +1,4 @@
+import React from 'react';
 import JoinARide from "./JoinARide";
 import { CTable } from "@coreui/react";
 import { shallow, mount } from "enzyme";

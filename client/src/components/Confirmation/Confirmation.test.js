@@ -1,3 +1,4 @@
+import React from 'react';
 import Confirmation from "./Confirmation";
 import { shallow, mount } from "enzyme";
 
