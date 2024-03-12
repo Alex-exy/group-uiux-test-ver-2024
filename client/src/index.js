@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
+import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
@@ -23,13 +23,13 @@ keycloak.init({ onLoad: 'check-sso' }).then((authenticated) => {
       user: keycloak.tokenParsed, // or any user detail you want to store
     }));
 
-    const root = ReactDOM.createRoot(document.getElementById('root'));
-    root.render(
+    ReactDOM.render(
       <Provider store={store}>
         <React.StrictMode>
           <App keycloak={keycloak}/>
         </React.StrictMode>
-      </Provider>
+      </Provider>,
+      document.getElementById('root')
     );
   } else {
     console.warn("Not authenticated");
