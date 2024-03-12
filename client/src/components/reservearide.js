@@ -2,6 +2,10 @@ import React, { useEffect, useState } from 'react';
 import axios from "axios";
 import { CNavbar, CContainer, CNavbarBrand, CNavbarToggler, CCollapse, CNavItem, CNavbarNav,CTable, CTableBody, CTableDataCell, CTableHead, CTableHeaderCell, CTableRow,   CModal, CModalHeader, CModalTitle, CModalBody, CModalFooter, CButton, CFormInput} from '@coreui/react';
 
+
+// Start backend in 2nd Terminal: node main.js
+// Start development server: npm start
+
 const ReserveARide = () => {
     const [vehicles, setVehicles] = useState([]);
     const [selectedRide, setSelectedRide] = useState({});
@@ -98,7 +102,12 @@ const ReserveARide = () => {
           </CModalHeader>
           <CModalBody>
             {modalStep === 1 && "Are you sure you want to reserve this ride?"}
-            {modalStep === 2 && "Do you want to allow others to join your ride?"}
+            {modalStep === 2 && (
+            <>
+                <div style={{ marginBottom: "10px" }}>Do you want to allow others to join your ride?</div>
+                <CButton color="primary" style={{ marginRight: '10px', padding: '10px' }} onClick={() => handleAllowJoin(false)}>No, I want a private ride</CButton>
+                <CButton color="dark" style={{ padding: '10px' }} onClick={() => handleAllowJoin(true)}>Yes, allow others to join</CButton>
+            </>)}
             {modalStep === 3 && (
               <>
                 <div>Please enter your destination:</div>
