@@ -4,7 +4,7 @@ import { CButton, CTable, CTableBody, CTableDataCell, CTableHead, CTableHeaderCe
 import { rides } from './ridesData'; 
 import './PastRides.css';
 import {useSelector} from 'react-redux';
-//const currentUser = "John";
+
 
 const PastRides = () => {
   const currentUser=useSelector((state)=>state.auth.user);

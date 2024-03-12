@@ -7,7 +7,7 @@ export const rides = [
     "distance": "150 km",
     "origin": "City A",
     "destination": "City B",
-    "imagePath": "./bmw.png"
+    "imagePath": "https://hips.hearstapps.com/hmg-prod/images/2024-tesla-model-s-107-6572200e43fa1.jpg?crop=0.473xw:0.355xh;0.254xw,0.341xh&resize=1200:*"
   },
   {
     "person": "John",
