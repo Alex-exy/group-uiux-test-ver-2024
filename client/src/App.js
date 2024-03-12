@@ -3,13 +3,13 @@ import './App.css';
 import '@coreui/coreui/dist/css/coreui.min.css';
 import { CContainer } from '@coreui/react';
 import NavBar from './components/NavBar';
-import { useSelector,useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { setUserId } from './store/authSlice';
 
 function App({ keycloak }) {
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
     const dispatch=useDispatch();
-      const user = useSelector((state) => state.auth.user); 
+    const user = useSelector((state) => state.auth.user); 
 
   useEffect(() => {
     // Function to refresh the token
@@ -37,7 +37,7 @@ function App({ keycloak }) {
     var t = (({ family_name, given_name, preferred_username, email, sub }) => ({ family_name, given_name, preferred_username, email, sub }))(keycloak.tokenParsed);
 
 
-    dispatch(setUserId(t));
+    dispatch(setUser(t));
     console.log(t)
     //console.log(useSelector((state) => state.auth.user));
     // Cleanup on component unmount
