@@ -1,5 +1,5 @@
 import "./JoinARide.css";
-import axios from "axios";
+//import axios from "axios";
 import { useEffect, useState } from "react";
 import { CNavbar, CContainer, CNavbarBrand, CNavbarToggler, CCollapse, CNavItem, CNavbarNav, CTable, CTableBody, CTableDataCell, CTableHead, CTableHeaderCell, CTableRow, CModal, CModalHeader, CModalTitle, CModalBody, CModalFooter, CButton, CFormInput } from '@coreui/react';
 import { useNavigate } from "react-router-dom";
@@ -20,7 +20,7 @@ const JoinARide = ({ isLoggedIn }) => {
     useEffect(() => {
         const fetchAvailableRides = async () => {
             try {
-                const response = await axios.post('http://localhost:4000/ridesDummy', {});
+                const response = await fetch.post('http://localhost:4000/ridesDummy', {});
                 const joinableRides = response.data.filter(ride => ride.status === 'Share');
                 setAvailableRides(joinableRides);
             }

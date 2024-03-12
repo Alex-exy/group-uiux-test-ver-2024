@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from "axios";
+//import axios from "axios";
 
 // Import necessary components and hooks from react-router-dom
 import { BrowserRouter as Router, Routes, Route, NavLink } from 'react-router-dom';
@@ -23,7 +23,7 @@ const ReserveARide = () => {
   useEffect(() => {
     const fetchRides = async () => {
       try {
-        const response = await axios.post('http://localhost:4000/ridesDummy', {});
+        const response = await fetch.post('http://localhost:4000/ridesDummy', {});
         const freeRides = response.data.filter(ride => ride.status === 'Free');
         setVehicles(freeRides);
       } catch (error) {
@@ -64,7 +64,7 @@ const ReserveARide = () => {
 
     // Send rideInfo to backend
     const joinFlag = allowJoin ? 1 : 0;
-    axios.post('http://localhost:4000/confirmRide', { ...rideInfo, join: joinFlag })
+    fetch.post('http://localhost:4000/confirmRide', { ...rideInfo, join: joinFlag })
       .then(response => {
         console.log('Ride confirmed:', response.data);
         // Handle success (e.g., show confirmation message, reset form)
