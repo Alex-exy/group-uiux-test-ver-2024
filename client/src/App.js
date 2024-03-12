@@ -3,10 +3,13 @@ import './App.css';
 import '@coreui/coreui/dist/css/coreui.min.css';
 import { CContainer } from '@coreui/react';
 import NavBar from './components/NavBar';
-import { useSelector } from 'react-redux';
+import { useSelector,useDispatch } from 'react-redux';
+import { setUserId } from './store/authSlice';
 
 function App({ keycloak }) {
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+    const dispatch=useDispatch();
+      const user = useSelector((state) => state.auth.user); 
 
   useEffect(() => {
     // Function to refresh the token
@@ -28,9 +31,26 @@ function App({ keycloak }) {
     // Set up the token refresh to run periodically
     const refreshInterval = setInterval(refreshToken, 60000); // Refresh every 1 minute as an example
 
+    //var {family_name,given_name,preffered_username,email,sub}=(keycloak.tokenParsed);
+    //var t={family_name,given_name,preffered_username,email,sub};
+
+    var t = (({ family_name, given_name, preferred_username, email, sub }) => ({ family_name, given_name, preferred_username, email, sub }))(keycloak.tokenParsed);
+
+
+    dispatch(setUserId(t));
+    console.log(t)
+    //console.log(useSelector((state) => state.auth.user));
     // Cleanup on component unmount
     return () => clearInterval(refreshInterval);
-  }, [keycloak, isAuthenticated]); // Only re-run if keycloak instance or isAuthenticated changes
+  }, [keycloak, isAuthenticated, dispatch]); // Only re-run if keycloak instance or isAuthenticated changes
+
+      useEffect(() => {
+        // This useEffect listens for changes in the user state
+        // and logs the user state when it updates.
+        if (user) { // Check if the user object is not null
+            console.log('Updated user state:', user);
+        }
+    }, [user]); // Dependency array includes user, so this runs when user changes
 
 
 
