@@ -3,22 +3,21 @@ import { CButton, CTable, CTableBody, CTableDataCell, CTableHead, CTableHeaderCe
           CModal, CModalHeader, CModalTitle, CModalBody, CModalFooter } from '@coreui/react';
 import { rides } from './ridesData'; 
 import './PastRides.css';
-import {useSelector} from 'react-redux';
-
+import { useSelector } from 'react-redux';
 
 const PastRides = () => {
-  const currentUser=useSelector((state)=>state.auth.user);
-  console.log(currentUser);
+  const currentUser = useSelector((state) => state.auth.user);
   const [showModal, setShowModal] = useState(false);
   const [selectedRide, setSelectedRide] = useState(null);
 
   
-  const usersRides = rides.filter(ride => ride.person === currentUser.given_name);
+  const usersRides = rides.filter((ride) => ride.person === currentUser.given_name);
 
   const handleRowClick = (ride) => {
     setSelectedRide(ride); 
     setShowModal(true); 
   };
+  
 
   const handlePrint = () => {
     window.print();
@@ -49,8 +48,8 @@ const PastRides = () => {
       </CTable>
 
       <CModal visible={showModal} onClose={() => setShowModal(false)} className='cModal'>
-        <CModalHeader className='modalTitle'>
-          <div className="centered">
+        <CModalHeader>
+          <div >
             <CModalTitle>Ride Details</CModalTitle>
           </div>
         </CModalHeader>
@@ -79,7 +78,7 @@ const PastRides = () => {
               <h4>{selectedRide.destination}</h4>
               
             
-              <img src={selectedRide.imagePath} alt="Car" />
+              <img className='modal-image' src={selectedRide.imagePath} alt="Car" />
             </div>
           )}
         </CModalBody>

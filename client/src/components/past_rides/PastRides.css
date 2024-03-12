@@ -11,11 +11,10 @@
     }
   }
 
-  .modalTitle {
-    display: flex;
-    justify-content: center;
-  }
-  
-  .centered {
-    align-self: center;
+ .modal-image {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto; 
+    max-height: 70vh; 
   }
