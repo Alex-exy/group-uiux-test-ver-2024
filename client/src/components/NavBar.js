@@ -4,6 +4,8 @@ import axios from "axios";
 // Import necessary components and hooks from react-router-dom
 import { BrowserRouter as Router, Routes, Route, NavLink } from 'react-router-dom';
 import { CNavbar, CContainer, CNavbarBrand, CNavbarToggler, CCollapse, CNavItem, CNavbarNav,CTable, CTableBody, CTableDataCell, CTableHead, CTableHeaderCell, CTableRow,   CModal, CModalHeader, CModalTitle, CModalBody, CModalFooter, CButton, CFormInput} from '@coreui/react';
+import Profile from './Profile';
+import userProfile from './john_doe.jpeg';
 
 import ReserveARide from './reservearide';
 
@@ -96,6 +98,17 @@ function NavBar() {
                   </NavLink>
                 </CNavItem>
               </CNavbarNav>
+          <CNavbarNav className="ms-auto">
+            <CNavItem>
+              <NavLink to="/profile" className="nav-link">
+                <img
+                  src={userProfile} // Replace with your profile image path
+                  alt="Profile"
+                  style={{ width: '40px', height: '40px', borderRadius: '50%' }}
+                />
+              </NavLink>
+            </CNavItem>
+          </CNavbarNav>
             </CCollapse>                                                                                                                                                                      
           </CContainer>
         </CNavbar>
@@ -106,6 +119,7 @@ function NavBar() {
           <Route path="/join-a-ride" element={<JoinARide />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/past-rides" element={<PastRides />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
       </>
     </Router>
