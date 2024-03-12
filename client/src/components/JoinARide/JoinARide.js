@@ -1,5 +1,5 @@
 import "./JoinARide.css";
-//import axios from "axios";
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { CNavbar, CContainer, CNavbarBrand, CNavbarToggler, CCollapse, CNavItem, CNavbarNav, CTable, CTableBody, CTableDataCell, CTableHead, CTableHeaderCell, CTableRow, CModal, CModalHeader, CModalTitle, CModalBody, CModalFooter, CButton, CFormInput } from '@coreui/react';
 import { useNavigate } from "react-router-dom";
@@ -7,20 +7,14 @@ import { useNavigate } from "react-router-dom";
 const JoinARide = ({ isLoggedIn }) => {
     const [availableRides, setAvailableRides] = useState([]);
     const [loginInfo, setLoginInfo] = useState(false);
-
-    //FIX
-    const [selectedRideInfo, setSelectedRideInfo] = useState({
-        name: '',
-        dest: '',
-        time: '',
-    });
+    const [selectedRide, setSelectedRide] = useState(null)
 
     const navigate = useNavigate();
 
     useEffect(() => {
         const fetchAvailableRides = async () => {
             try {
-                const response = await fetch.post('http://localhost:4000/ridesDummy', {});
+                const response = await axios.post('http://localhost:4000/ridesDummy', {});
                 const joinableRides = response.data.filter(ride => ride.status === 'Share');
                 setAvailableRides(joinableRides);
             }
@@ -32,19 +26,17 @@ const JoinARide = ({ isLoggedIn }) => {
     }, []);
 
 
-    // ERROR - will be replaced 
+    // Will be replaced 
     useEffect(() => {
     }, [isLoggedIn]);
 
 
-    const handleSelection = (rideid, ridename, ridedestination, ridedeparturetime) => {
+    const handleSelection = (ride) => {
+
+        setSelectedRide(ride);
+
         if (isLoggedIn) {
-            setSelectedRideInfo({
-                name: ridename,
-                dest: ridedestination,
-                time: ridedeparturetime,
-            })
-            navigate(`/confirm-joining/${rideid}/Confirm`);
+            navigate(`/confirm-joining/${ride.id}/Confirm`);
         } else {
             handleLoginInfo();
         }
@@ -75,7 +67,7 @@ const JoinARide = ({ isLoggedIn }) => {
                 </CTableHead>
                 <CTableBody>
                     {availableRides.map((ride) => (
-                        <CTableRow key={ride.id} onClick={() => handleSelection(ride.id, ride.booker, ride.destination, ride.departureTime)}>
+                        <CTableRow key={ride.id} onClick={() => handleSelection(ride)}>
                             <CTableDataCell>
                                 {ride.booker}
                             </CTableDataCell>

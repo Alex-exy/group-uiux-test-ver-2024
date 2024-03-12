@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-//import axios from "axios";
+import axios from "axios";
 
 // Import necessary components and hooks from react-router-dom
 import { BrowserRouter as Router, Routes, Route, NavLink } from 'react-router-dom';
@@ -23,7 +23,7 @@ const ReserveARide = () => {
   useEffect(() => {
     const fetchRides = async () => {
       try {
-        const response = await fetch.post('http://localhost:4000/ridesDummy', {});
+        const response = await axios.post('http://localhost:4000/ridesDummy', {});
         const freeRides = response.data.filter(ride => ride.status === 'Free');
         setVehicles(freeRides);
       } catch (error) {
