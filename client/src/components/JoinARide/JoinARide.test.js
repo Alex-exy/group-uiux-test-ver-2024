@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import rideReducer from "../../store/rideSlice";
 import JoinARide from './JoinARide';
+import axios from 'axios';
 
 describe('Renders DOM elements correctly', () => {
     let wrapper;
@@ -74,6 +75,29 @@ describe('Renders DOM elements correctly', () => {
 
 //Table
 describe('Check the rows of the table', () => {
+
+    let wrapper;
+    let store;
+
+    beforeEach(() => {
+        // Create a store with the necessary reducer and preloaded state
+        store = configureStore({
+            reducer: {
+                ride: rideReducer, // Assuming rideReducer is a slice reducer for 'ride'
+            },
+            preloadedState: {
+                ride: {
+                    selectedRide: {}
+                }
+            }
+        });
+
+        wrapper = mount(
+            <Provider store={store}>
+                <JoinARide />
+            </Provider>
+        );
+    });
 
     it("One Table row should have 6 elements", () => {
         let elements = wrapper.find("#rideRow");
