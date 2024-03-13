@@ -8,8 +8,8 @@ import {useSelector} from 'react-redux';
 const Confirmation = () => {
 
 
-    const selectedRide = useSelector((state) => state.ride.selectedRide); 
-    console.log(selectedRide.booker);
+    //const selectedRide = useSelector((state) => state.ride.selectedRide); 
+    //console.log(selectedRide.booker);
 
     const [showApproveModal, setShowApproveModal] = useState(false);
     const [showCancleModal, setShowCancleModal] = useState(false);
@@ -31,7 +31,7 @@ const Confirmation = () => {
                 Summarized details of the selected ride:
             </div>
             <div className="detailList">
-                <p className="detName"> Booker: {selectedRide.booker}</p>
+                <p className="detName"> Booker: </p>
                 <p className="detDest"> To:</p>
                 <p className="detTime"> Leaves at:  </p>
             </div >
