@@ -3,7 +3,6 @@ import './App.css';
 import '@coreui/coreui/dist/css/coreui.min.css';
 import { CContainer } from '@coreui/react';
 import NavBar from './components/NavBar';
-//import LoginButton from './components/LoginButton/LoginButton';
 import { useSelector, useDispatch } from 'react-redux';
 import { setUser } from './store/authSlice';
 
@@ -55,14 +54,7 @@ function App({ keycloak }) {
 
   return (
     <CContainer fluid className="mainContainer">
-      <NavBar>
-      </ NavBar>
       <NavBar />
-      {isAuthenticated ? (
-        <div>Welcome to the authenticated part of the app!</div>
-      ) : (
-        <div>Please log in to see this content.</div>
-      )}
     </CContainer>
   );
 }
