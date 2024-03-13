@@ -9,7 +9,6 @@ import { setSelectedRide } from '../../store/rideSlice';
 const JoinARide = ({ isLoggedIn }) => {
     const [availableRides, setAvailableRides] = useState([]);
     const [loginInfo, setLoginInfo] = useState(false);
-    //const [selectedRide, setSelectedRide] = useState(null)
 
     const navigate = useNavigate();
 
@@ -29,8 +28,6 @@ const JoinARide = ({ isLoggedIn }) => {
     }, []);
 
     const handleSelection = (ride) => {
-
-        //setSelectedRide(ride);
         dispatch(setSelectedRide(ride));
         navigate(`/confirm-joining/${ride.id}/Confirm`);
     };

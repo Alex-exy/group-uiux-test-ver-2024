@@ -4,13 +4,12 @@ import { CModal, CModalHeader, CModalTitle, CModalBody, CModalFooter, CButton } 
 import React, { useState } from 'react';
 //import {selectedRide} from "../JoinARide/JoinARide";
 import { useSelector } from 'react-redux';
+import rideSlice from "../../store/rideSlice";
 
 const Confirmation = () => {
 
-    //const selectedRide = useSelector((state) => state.ride.selectedRide); 
+    const selectedRide = useSelector((state) => state.ride.selectedRide);
     //console.log(selectedRide.booker);
-
-    //FIX DATA DISPLAY
 
     const [showApproveModal, setShowApproveModal] = useState(false);
     const [showCancleModal, setShowCancleModal] = useState(false);
@@ -32,9 +31,9 @@ const Confirmation = () => {
                 Summarized details of the selected ride:
             </div>
             <div className="detailList">
-                <p className="detName">Booker: </p>
-                <p className="detDest">To: </p>
-                <p className="detTime">Leaves at: </p>
+                <p className="detName">Booker: {selectedRide.booker} </p>
+                <p className="detDest">To: {selectedRide.destination} </p>
+                <p className="detTime">Leaves at: {selectedRide.time} </p>
             </div >
             <button id="confirmButton" onClick={handleApproveModal}>
                 Confirm Joining

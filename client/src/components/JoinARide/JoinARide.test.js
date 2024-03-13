@@ -5,6 +5,8 @@ import { configureStore } from '@reduxjs/toolkit';
 import rideReducer from "../../store/rideSlice";
 import JoinARide from './JoinARide';
 import axios from 'axios';
+import { BrowserRouter as Router } from 'react-router-dom';
+
 
 describe('Renders DOM elements correctly', () => {
     let wrapper;
@@ -25,7 +27,9 @@ describe('Renders DOM elements correctly', () => {
 
         wrapper = mount(
             <Provider store={store}>
-                <JoinARide />
+                <Router>
+                    <JoinARide />
+                </Router>
             </Provider>
         );
     });
