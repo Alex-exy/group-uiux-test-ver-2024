@@ -1,9 +1,8 @@
-const express = require('express');
-const { MongoClient } = require('mongodb');
-const cors = require('cors');
-const bodyParser = require('body-parser');
+import express from 'express';
+import cors from "cors";
+import bodyParser from 'body-parser';
 
-const rideData = require('./ridesData');
+import rideData from "./ridesData.js";
 
 const app = express();
 app.use(cors()); // Enable All CORS Requests

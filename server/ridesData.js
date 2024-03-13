@@ -1,4 +1,4 @@
-export const rides = [
+export default [
   {
     "person": "John",
     "time": "09:30",
