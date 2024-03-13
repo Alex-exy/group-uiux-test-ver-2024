@@ -33,6 +33,8 @@ describe('ReserveARide Component', () => {
     firstRow.simulate('click');
 
     expect(wrapper.find('#reservearide_cmodal_id').prop('visible')).toBe(true);
+
+    //Testing framework does not render the modal
   });
   /*
   // Test 04
