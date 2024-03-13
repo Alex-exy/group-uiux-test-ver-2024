@@ -3,16 +3,18 @@ const { MongoClient } = require('mongodb');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 
+const rideData = require('./ridesData');
+
 const app = express();
 app.use(cors()); // Enable All CORS Requests
 
 const port = 4000; // or any port you prefer
 
 // MongoDB URI - updated to use the correct port 27027
-const mongoURI = 'mongodb://localhost:27027/RideManager';
+//const mongoURI = 'mongodb://localhost:27027/RideManager';
 
 // Create a new MongoClient
-const client = new MongoClient(mongoURI);
+//const client = new MongoClient(mongoURI);
 
 async function main() {
     app.use(bodyParser.json());
@@ -23,15 +25,15 @@ async function main() {
                 //res.status(500).json({ error: 'An error occurred while fetching rides', details: err });
             //}
         });
-    try {
+    //try {
         // Connect the client to the server
-        await client.connect();
-        console.log("Connected successfully to MongoDB");
+        //await client.connect();
+        //console.log("Connected successfully to MongoDB");
 
-    } catch (err) {
-        console.error(err);
-        process.exit(1); // Exit the process in case of initial connection failure
-    }
+    //} catch (err) {
+        //console.error(err);
+        //process.exit(1); // Exit the process in case of initial connection failure
+    //}
         // Endpoint to get all Rides
         //app.post('/rides', async (req, res) => {
             //try {
@@ -42,22 +44,22 @@ async function main() {
             //}
         //});
     app.post('/getPreviousRides', async (req, res) => {
-    try {
-        const db = client.db('RideManager');
-        const ridesCollection = db.collection('rides');
+    //try {
+        //const db = client.db('RideManager');
+        //const ridesCollection = db.collection('rides');
 
-        console.log(req);
-        const userId = req.body.id;
+        //console.log(req);
+        //const userId = req.body.id;
     
-        const rides = await db.collection('previousRides').find({userId:userId}).toArray();
+        //const rides = await db.collection('previousRides').find({userId:userId}).toArray();
 
-        client.close();
+        //client.close();
 
-        res.json({ success: true, rides });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ success: false, message: 'Failed to retrieve previous rides' });
-    }
+        res.json({ success: true, rideData });
+    //} catch (error) {
+        //console.error(error);
+        //res.status(500).json({ success: false, message: 'Failed to retrieve previous rides' });
+    //}
 });
 
 
