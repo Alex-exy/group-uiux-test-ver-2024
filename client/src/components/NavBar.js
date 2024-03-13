@@ -8,7 +8,7 @@ import { CNavbar, CContainer, CNavbarBrand, CNavbarToggler, CCollapse, CNavItem,
 import Profile from './Profile';
 import userProfile from './john_doe.jpeg';
 
-import ReserveARide from './reservearide';
+import ReserveARide from './ReserveARide/reservearide';
 
 //const JoinARide = () => {
   //const [rides, setRides] = useState([]);
