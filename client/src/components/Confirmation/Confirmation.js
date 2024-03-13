@@ -10,6 +10,8 @@ const Confirmation = () => {
     //const selectedRide = useSelector((state) => state.ride.selectedRide); 
     //console.log(selectedRide.booker);
 
+    //FIX DATA DISPLAY
+
     const [showApproveModal, setShowApproveModal] = useState(false);
     const [showCancleModal, setShowCancleModal] = useState(false);
 

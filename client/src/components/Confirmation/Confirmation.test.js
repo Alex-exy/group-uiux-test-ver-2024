@@ -4,7 +4,6 @@ import { mount } from "enzyme";
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import rideReducer from "../../store/rideSlice";
-import JoinARide from '../JoinARide/JoinARide';
 
 describe('Renders DOM elements correctly', () => {
     let wrapper;
@@ -51,7 +50,7 @@ describe('Renders DOM elements correctly', () => {
         expect(button).toBe("Cancel Joining");
     });
 
-    //Detail List
+    //Detail list components
     it("Detail list name rendered correctly", () => {
         let details = wrapper.find(".detName").text();
         expect(details).toBe("Booker: ");
@@ -68,7 +67,8 @@ describe('Renders DOM elements correctly', () => {
     });
 });
 
-describe('Button functionalities working as expected', () => {
+//Buttons
+describe('Check button functionalities working as expected', () => {
     let wrapper;
     let store;
 
@@ -92,11 +92,12 @@ describe('Button functionalities working as expected', () => {
         );
     });
 
+    //FIX
     const handleApproveModal = jest.fn();
     const handleCancleModal = jest.fn();
    
     it("Confirm Button should set showApprovedModal true", () => {
-        const confirmButton = wrapper.shallow("#confirmButton ");
+        const confirmButton = wrapper.find("#confirmButton");
         confirmButton.simulate('click');
         expect(wrapper.find('#approvalModal').prop('visible')).toBe(true);
         //expect(wrapper.showApproveModal).toBe(true);
@@ -107,13 +108,15 @@ describe('Button functionalities working as expected', () => {
         cancelButton.simulate('click');
         expect(wrapper.find('#cancelModal').prop('visible')).toBe(true);
         //expect(wrapper.showApproveModal).toBe(true);
-    })
+    });
 });
 
 
 //CModal Tests not working because of Testing Framework does not support rendering the CModal
-//Theoretical tests - Should work accordingly but wont because of framework issues
+//Theoretical tests - Should work accordingly, but will not because of framework issues
+
 // ------------------------------------------------------
+
 /*
 describe('Check Approval CModal', () => {
     beforeEach(() => {
@@ -215,4 +218,5 @@ describe('Check Cancel CModal', () => {
     });
 });
 */
+
 // -----------------------------------------------------
