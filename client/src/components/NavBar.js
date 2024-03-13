@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import PastRides from "./past_rides/PastRides"
+import PastRidesTable from "./past_rides/PastRidesTable"
+import PastRidesDetails from "./past_rides/PastRidesDetails"
 //import axios from "axios";
 
 // Import necessary components and hooks from react-router-dom
@@ -55,7 +56,7 @@ function NavBar() {
                   </NavLink>
                 </CNavItem>
                 <CNavItem>
-                  <NavLink to="/past-rides" className="nav-link" disabled>
+                  <NavLink to="/past-rides-table" className="nav-link" disabled>
                     Past Rides
                   </NavLink>
                 </CNavItem>
@@ -82,7 +83,8 @@ function NavBar() {
           <Route path="/list-rides" element={<ListRides />} />
           <Route path="/join-a-ride" element={<JoinARide/>} />
           <Route path="/pricing" element={<Pricing />} />
-          <Route path="/past-rides" element={<PastRides />} />
+          <Route path="/past-rides-table" element={<PastRidesTable />} />
+          <Route path="/past-rides-details" element={<PastRidesDetails />} />
           <Route path="/confirm-joining/:id/:type" element={<Confirmation />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/reserve-a-ride" element={<ReserveARidePage />} />
