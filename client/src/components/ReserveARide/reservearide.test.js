@@ -11,7 +11,7 @@ describe('ReserveARide Component', () => {
   let wrapper = null;
 
   beforeEach(() => {
-    //useSelector.mockReturnValue({ auth: { user: { given_name: 'John Doe' } } }); //Not needed for this component, at the moment
+    //useSelector.mockReturnValue({ auth: { user: { given_name: 'John Doe' } } }); //Not required for this component, at the moment
     wrapper = shallow(<ReserveARide />);
   });
 
@@ -32,9 +32,7 @@ describe('ReserveARide Component', () => {
     const firstRow = wrapper.find('CTableRow').at(0);
     firstRow.simulate('click');
 
-    
-
-    expect(wrapper.find('CModal').prop('visible')).toBe(true);
+    expect(wrapper.find('#reservearide_cmodal_id').prop('visible')).toBe(true);
   });
   /*
   // Test 04

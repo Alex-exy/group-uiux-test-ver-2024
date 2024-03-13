@@ -95,8 +95,8 @@ const ReserveARide = () => {
             ))}
           </CTableBody>
         </CTable>
-  
-        <CModal visible={showModal} onClose={() => setShowModal(false)}>
+
+        <CModal id="reservearide_cmodal_id" visible={showModal} onClose={() => setShowModal(false)}>
           <CModalHeader>
             <CModalTitle>Reservation Confirmation</CModalTitle>
           </CModalHeader>
