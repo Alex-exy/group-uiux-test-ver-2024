@@ -98,7 +98,9 @@ describe('Check the rows of the table', () => {
 
         wrapper = mount(
             <Provider store={store}>
-                <JoinARide />
+                <Router>
+                    <JoinARide />
+                </Router>
             </Provider>
         );
     });

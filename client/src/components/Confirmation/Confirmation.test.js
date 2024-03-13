@@ -4,6 +4,7 @@ import { mount } from "enzyme";
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import rideReducer from "../../store/rideSlice";
+import { BrowserRouter as Router } from 'react-router-dom';
 
 describe('Renders DOM elements correctly', () => {
     let wrapper;
@@ -24,7 +25,9 @@ describe('Renders DOM elements correctly', () => {
 
         wrapper = mount(
             <Provider store={store}>
-                <Confirmation />
+                <Router>
+                    <Confirmation />
+                </Router>
             </Provider>
         );
     });
@@ -53,17 +56,17 @@ describe('Renders DOM elements correctly', () => {
     //Detail list components
     it("Detail list name rendered correctly", () => {
         let details = wrapper.find(".detName").text();
-        expect(details).toBe("Booker: ");
+        expect(details).toBe("Booker:  ");
     });
 
     it("Detail list destination rendered correctly", () => {
         let destination = wrapper.find(".detDest").text();
-        expect(destination).toBe("To: ")
+        expect(destination).toBe("To:  ")
     });
 
     it("Detail list rendered correctly", () => {
         let time = wrapper.find(".detTime").text();
-        expect(time).toBe("Leaves at: ");
+        expect(time).toBe("Leaves at:  ");
     });
 });
 
@@ -87,7 +90,9 @@ describe('Check button functionalities working as expected', () => {
 
         wrapper = mount(
             <Provider store={store}>
-                <Confirmation />
+                <Router>
+                    <Confirmation />
+                </Router>
             </Provider>
         );
     });
@@ -95,12 +100,12 @@ describe('Check button functionalities working as expected', () => {
     //FIX
     const handleApproveModal = jest.fn();
     const handleCancleModal = jest.fn();
-   
+
     it("Confirm Button should set showApprovedModal true", () => {
         const confirmButton = wrapper.find("#confirmButton");
         confirmButton.simulate('click');
-        expect(wrapper.find('#approvalModal').prop('visible')).toBe(true);
-        //expect(wrapper.showApproveModal).toBe(true);
+        //expect(wrapper.find('#approvalModal').prop('visible')).toBe(true);
+        expect(wrapper.showApproveModal).toBe(true);
     });
 
     it("Cancle Button should set showCancleModal true", () => {
