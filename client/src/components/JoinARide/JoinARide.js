@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 import {useDispatch} from "react-redux";
 import { setSelectedRide } from '../../store/rideSlice';
 
-
 const JoinARide = ({ isLoggedIn }) => {
     const [availableRides, setAvailableRides] = useState([]);
     const [loginInfo, setLoginInfo] = useState(false);
@@ -61,13 +60,13 @@ const JoinARide = ({ isLoggedIn }) => {
             </h4>
             <CTable hover responsive>
                 <CTableHead>
-                    <CTableRow>
-                        <CTableHeaderCell>Booker</CTableHeaderCell>
-                        <CTableHeaderCell>Destination</CTableHeaderCell>
-                        <CTableHeaderCell>Vehicle Type</CTableHeaderCell>
-                        <CTableHeaderCell>Battery Remaining</CTableHeaderCell>
-                        <CTableHeaderCell>Distance to Vehicle</CTableHeaderCell>
-                        <CTableHeaderCell>Departure Time</CTableHeaderCell>
+                    <CTableRow id="table">
+                        <CTableHeaderCell id="booker">Booker</CTableHeaderCell>
+                        <CTableHeaderCell id="destination">Destination</CTableHeaderCell>
+                        <CTableHeaderCell id="type">Vehicle Type</CTableHeaderCell>
+                        <CTableHeaderCell id="battery">Battery Remaining</CTableHeaderCell>
+                        <CTableHeaderCell id="distance">Distance to Vehicle</CTableHeaderCell>
+                        <CTableHeaderCell id="time">Departure Time</CTableHeaderCell>
                     </CTableRow>
                 </CTableHead>
                 <CTableBody>
