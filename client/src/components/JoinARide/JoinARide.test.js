@@ -47,7 +47,7 @@ describe('Renders DOM elements correctly', () => {
 
     //Row Components
     it("Should Booker cell rendered correctly", () => {
-        let cell = wrapper.find("#booker").text();
+        let cell = wrapper.find(".thisbooker").text();
         expect(cell).toBe("Booker");
     });
 
@@ -96,30 +96,33 @@ describe('Check the rows of the table', () => {
             }
         });
 
+        const availableRides = [
+            { id: 1, booker: 'Booker1', destination: 'Destination1', vehicleType: 'Type1', battery: 'Battery1', distanceToVehicle: 'Distance1', departureTime: 'Time1' },
+        ];
+
         wrapper = mount(
             <Provider store={store}>
                 <Router>
-                    <JoinARide />
+                    <JoinARide availableRides={availableRides}/>
                 </Router>
             </Provider>
         );
     });
 
-    it("One Table row should have 6 elements", () => {
-        let elements = wrapper.find("#rideRow");
-        const children = elements.children;
-        expect(children.length).toBe(6);
+    it("Check if table row has six elements", () => {
+        let row = wrapper.find("#rideRow").first();
+        expect(row.children().length).toEqual(6);
     });
 
     it("Check if redirected after click on Row", () => {
         const handleSelection = jest.fn();
-        const row = wrapper.find('[data-testid="rideList"]').first();
+        const row = wrapper.find('#rideRow').first();
         row.simulate('click');
         expect(handleSelection).toHaveBeenCalled();
     });
 });
 
-//FIX
+//FIX - TypeError: _axios.default.post.mockImplementation is not a function
 //Fetching
 describe('Check if fetching rides works correctly', () => {
 
@@ -127,7 +130,7 @@ describe('Check if fetching rides works correctly', () => {
         jest.clearAllMocks();
     });
 
-    it('Fetches rides successfully', async () => {
+    it('Fetches rides successfully', () => {
         axios.post.mockImplementation(() => ({
             data: [{ id: 1, status: 'Share' }, { id: 2, status: 'Share' }]
         }));
@@ -135,7 +138,7 @@ describe('Check if fetching rides works correctly', () => {
         expect(setAvailableRides).toHaveBeenCalledWith([{ id: 1, status: 'Share' }, { id: 2, status: 'Share' }]);
     });
 
-    it('Handles fetch error', async () => {
+    it('Handles fetch error', () => {
         axios.post.mockImplementation(() => {
             throw new Error('Failed to fetch rides');
         });

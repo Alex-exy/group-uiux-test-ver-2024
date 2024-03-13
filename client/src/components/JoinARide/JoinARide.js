@@ -28,6 +28,7 @@ const JoinARide = ({ isLoggedIn }) => {
     }, []);
 
     const handleSelection = (ride) => {
+        //Cannot log after tests are done. Did you forget to wait for something async in your test?    
         dispatch(setSelectedRide(ride));
         navigate(`/confirm-joining/${ride.id}/Confirm`);
     };
@@ -47,7 +48,7 @@ const JoinARide = ({ isLoggedIn }) => {
             <CTable hover responsive>
                 <CTableHead>
                     <CTableRow id="table">
-                        <CTableHeaderCell id="booker">Booker</CTableHeaderCell>
+                        <CTableHeaderCell className="thisbooker">Booker</CTableHeaderCell>
                         <CTableHeaderCell id="destination">Destination</CTableHeaderCell>
                         <CTableHeaderCell id="type">Vehicle Type</CTableHeaderCell>
                         <CTableHeaderCell id="battery">Battery Remaining</CTableHeaderCell>

@@ -12,7 +12,9 @@ const Confirmation = () => {
     //console.log(selectedRide.booker);
 
     const [showApproveModal, setShowApproveModal] = useState(false);
+    const approvalVisible = false;
     const [showCancleModal, setShowCancleModal] = useState(false);
+    const cancelVisible = false;
 
     const handleApproveModal = () => {
         setShowApproveModal(true);
@@ -44,7 +46,7 @@ const Confirmation = () => {
 
             <CModal id="approvalModal" visible={showApproveModal} onClose={() => setShowApproveModal(false)}>
                 <CModalHeader>
-                    <CModalTitle id="approvalHeader">Joining Approved! </CModalTitle>
+                    <CModalTitle id="approvalHeader">Joining Approved!</CModalTitle>
                 </CModalHeader>
                 <CModalBody id="approvalBody"> You will be redirected back to the Join-a-Ride page . . . </CModalBody>
                 <CModalFooter>
@@ -56,7 +58,7 @@ const Confirmation = () => {
 
             <CModal id="cancelModal" visible={showCancleModal} onClose={() => setShowCancleModal(false)}>
                 <CModalHeader>
-                    <CModalTitle id="cancelHeader">Joining Canceled! </CModalTitle>
+                    <CModalTitle id="cancelHeader">Joining Canceled!</CModalTitle>
                 </CModalHeader>
                 <CModalBody id="cancelBody"> You will be redirected back to the Join-a-Ride page . . . </CModalBody>
                 <CModalFooter>
