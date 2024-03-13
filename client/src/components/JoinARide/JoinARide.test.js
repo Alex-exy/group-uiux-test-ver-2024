@@ -34,6 +34,10 @@ describe('Renders DOM elements correctly', () => {
         );
     });
 
+    afterEach(() => {
+        wrapper.unmount();
+    });
+
     //DOM Text components
     it("Should render Title as Join a Ride", () => {
         let title = wrapper.find(".header").text();
@@ -103,26 +107,40 @@ describe('Check the rows of the table', () => {
         wrapper = mount(
             <Provider store={store}>
                 <Router>
-                    <JoinARide availableRides={availableRides}/>
+                    <JoinARide availableRides={availableRides} />
                 </Router>
             </Provider>
         );
     });
 
+    afterEach(() => {
+        wrapper.unmount();
+    });
+
+    //FIX 
     it("Check if table row has six elements", () => {
         let row = wrapper.find("#rideRow").first();
+        expect(row.find('#rideRow').length).toBeGreaterThan(0);
         expect(row.children().length).toEqual(6);
     });
 
+
+    // FIX - mock function ?
     it("Check if redirected after click on Row", () => {
         const handleSelection = jest.fn();
+        wrapper.find('#rideRow').first().simulate('click');
+
+        /*
         const row = wrapper.find('#rideRow').first();
         row.simulate('click');
+        */
+
         expect(handleSelection).toHaveBeenCalled();
     });
 });
 
 //FIX - TypeError: _axios.default.post.mockImplementation is not a function
+
 //Fetching
 describe('Check if fetching rides works correctly', () => {
 

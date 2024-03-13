@@ -32,6 +32,10 @@ describe('Renders DOM elements correctly', () => {
         );
     });
 
+    afterEach(() => {
+        wrapper.unmount();
+    });
+
     //DOM Text Components
     it("Should Title be rendered as Please confirm you joining of the ride:", () => {
         let h2 = wrapper.find(".header").text();
@@ -97,6 +101,10 @@ describe('Check button functionalities working as expected', () => {
         );
     });
 
+    afterEach(() => {
+        wrapper.unmount();
+    });
+
     //FIX ?
     it("Confirm Button should set showApprovedModal true, approvealModal exists", () => {
         const confirmButton = wrapper.find("#confirmButton");
@@ -106,7 +114,7 @@ describe('Check button functionalities working as expected', () => {
         //expect(wrapper.getByText('Joining Approved!')).toBeVisible(); 
         //Alternative method check if it exists
         const header = wrapper.find('#approvalHeader').text();
-        expect(header).toBe('Joining Approved!');      
+        expect(header).toBe('Joining Approved!');
     });
 
     it("Cancel Button should set showCancleModal true, cancelModal exists", () => {
@@ -114,7 +122,7 @@ describe('Check button functionalities working as expected', () => {
         const cancelButton = wrapper.find("#cancelButton");
         cancelButton.simulate('click');
         //Framework issue
-        expect(wrapper.find('#cancelModal').exists()).toBe(true); 
+        expect(wrapper.find('#cancelModal').exists()).toBe(true);
         //expect(wrapper.getByText('Joining Canceled!')).toBeVisible();
         //Alternative method check if it exists
         const header = wrapper.find('#cancelHeader').text();
@@ -146,6 +154,10 @@ describe('Check Approval CModal', () => {
                 <Confirmation />
             </Provider>
         );
+    });
+
+    afterEach(() => {
+        wrapper.unmount();
     });
 
     it('Render approval Modal', () => {

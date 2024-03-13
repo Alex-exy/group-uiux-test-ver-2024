@@ -12,9 +12,7 @@ const Confirmation = () => {
     //console.log(selectedRide.booker);
 
     const [showApproveModal, setShowApproveModal] = useState(false);
-    const approvalVisible = false;
     const [showCancleModal, setShowCancleModal] = useState(false);
-    const cancelVisible = false;
 
     const handleApproveModal = () => {
         setShowApproveModal(true);
