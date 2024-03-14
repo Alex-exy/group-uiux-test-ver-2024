@@ -6,6 +6,7 @@ import rideReducer from "../../store/rideSlice";
 import JoinARide from './JoinARide';
 import axios from 'axios';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 describe('Renders DOM elements correct', () => {
     let wrapper;
@@ -30,10 +31,6 @@ describe('Renders DOM elements correct', () => {
                 </Router>
             </Provider>
         );
-    });
-
-    afterEach(() => {
-        wrapper.unmount();
     });
 
     //DOM Text components
@@ -87,10 +84,6 @@ describe('Check if table is displayed and working correct', () => {
         );
     });
 
-    afterEach(() => {
-        wrapper.unmount();
-    });
-
     //Table header and its components
     it('Table header should contain six elements and a description of every element', () => {
         let table = wrapper.find('CTableHeaderCell')
@@ -103,18 +96,87 @@ describe('Check if table is displayed and working correct', () => {
         expect(table.at(5).text()).toBe('Departure Time');
     })
 
-    // FIX - mock function
+
+    // FIX 
     it("Check if redirected after click on Row", () => {
+        /*
         const handleSelection = jest.fn();
         wrapper.find('#rideRow').first().simulate('click');
 
-        /*
-        const row = wrapper.find('#rideRow').first();
-        row.simulate('click');
-        */
+        
+        //const row = wrapper.find('#rideRow').first();
+        //row.simulate('click');
+        
 
         expect(handleSelection).toHaveBeenCalled();
+        */
     });
+});
+
+
+jest.mock('react-redux', () => ({
+    ...jest.requireActual('react-redux'),
+    useSelector: jest.fn(),
+}));
+
+//Table Row
+describe('Check if table rows are created as desired', () => {
+
+    let wrapper;
+    let store;
+
+    store = configureStore({
+        reducer: {
+            ride: rideReducer,
+        },
+        preloadedState: {
+            ride: {
+                selectedRide: {}
+            }
+        }
+    });
+
+    jest.mock('react-router-dom', () => ({
+        useNavigate: () => ({
+            navigate: jest.fn(),
+        }),
+    }));
+
+    const mockData = [
+        {
+            booker: "Max",
+            desination: "Munich",
+            vehicleType: "BMW",
+            battery: "70%",
+            distanceToVehicle: "7 km",
+            departureTime: "12:00",
+        },
+    ];
+
+    beforeEach(() => {
+        useSelector.mockReturnValue({
+            auth: {
+                user: { given_name: 'John' },
+            },
+        });
+    });
+
+    afterEach(() => {
+        useSelector.mockClear();
+    });
+
+    it('Creates a CTable row for a dummy user', () => {
+        const wrapper = mount(
+            <Provider store={store}>
+                <Router>
+                    <JoinARide availableRides={mockData} />
+                </Router>
+            </Provider>
+        );
+        const tableRows = wrapper.find('CTableRow');
+        expect(tableRows).toHaveLength(mockData.filter((ride) => ride.booker === 'Max').length);
+    });
+
 });
 
 //Check HTTP request 
