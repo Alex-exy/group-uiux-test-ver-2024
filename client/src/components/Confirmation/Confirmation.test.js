@@ -111,8 +111,8 @@ describe('Check buttons working as expected', () => {
         expect(wrapper.find('#approvalModal').exists()).toBe(true);
         //expect(wrapper.getByText('Joining Approved!')).toBeVisible(); 
         //Alternative method check if it exists
-        const header = wrapper.find('#approvalHeader').text();
-        expect(header).toBe('Joining Approved!');
+        const header = wrapper.find('#approvalHeader');
+        expect(header.text()).toBe('Joining Approved!');
     });
 
     it("Cancel Button should set showCancleModal true, cancelModal exists", () => {
@@ -123,15 +123,22 @@ describe('Check buttons working as expected', () => {
         expect(wrapper.find('#cancelModal').exists()).toBe(true);
         //expect(wrapper.getByText('Joining Canceled!')).toBeVisible();
         //Alternative method check if it exists
-        const header = wrapper.find('#cancelHeader').text();
-        expect(header).toBe('Joining Canceled!');
+        const header = wrapper.find('#cancelHeader');
+        expect(header.text()).toBe('Joining Canceled!');
     });
 });
 
 //Check HTTP request
-describe('Check if http response at confirm or cancle works correcty', () => {
+describe('Check if http requests are handled correct', () => {
 
-})
+    it('Gets response successfully', () => {
+
+    })
+
+    it('Handles error response', () => {
+
+    })
+});
 
 
 //CModal Tests not working because of Testing Framework does not support rendering the CModal
@@ -155,7 +162,9 @@ describe('Check Approval CModal', () => {
 
         wrapper = mount(
             <Provider store={store}>
-                <Confirmation />
+                <Router>
+                    <Confirmation />
+                </Router>
             </Provider>
         );
     });
@@ -164,8 +173,8 @@ describe('Check Approval CModal', () => {
         wrapper.unmount();
     });
 
-    it('Render approval Modal', () => {
-        const button = wrapper.find('.confirmButton');
+    it('Approve Modal exists', () => {
+        const button = wrapper.find('#confirmButton');
         button.simulate('click');
         //Expected output would be true, due to mentioned framework issues is false
         expect(wrapper.find('#approvalModal').prop('visible')).toBe(true);
@@ -191,9 +200,12 @@ describe('Check Approval CModal', () => {
         ok.simulate("click");
         expect(wrapper.find('#approvalModal').prop('visible')).toBe(false);;
     });
-})
+});
 
 describe('Check Cancel CModal', () => {
+    let wrapper;
+    let store;
+
     beforeEach(() => {
         store = configureStore({
             reducer: {
@@ -208,13 +220,15 @@ describe('Check Cancel CModal', () => {
 
         wrapper = mount(
             <Provider store={store}>
-                <Confirmation />
+                <Router>
+                    <Confirmation />
+                </Router>
             </Provider>
         );
     });
 
-    it('Render cancel Modal', () => {
-        const row = wrapper.find('.cancelButton');
+    it('Cancel modal exists', () => {
+        const row = wrapper.find('#cancelButton');
         row.simulate('click');
         //Expected output would be true, due to mentioned framework issues is false
         expect(wrapper.find('#cancelModal').prop('visible')).toBe(true);
