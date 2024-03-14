@@ -47,7 +47,7 @@ describe('Renders DOM elements correct', () => {
         let description = wrapper.find(".description").text();
         expect(description).toBe("Please click on the ride you want to join:");
     });
-})
+});
 
 //Table
 describe('Check if table is displayed and working correct', () => {
@@ -120,7 +120,9 @@ describe('Check if table is displayed and working correct', () => {
 
 //FIX - TypeError: _axios.default.post.mockImplementation is not a function
 
-//Check HTTP request
+// COPY HTTP REQUEST TESTS INTO CONFIRMATION AS WELL 
+
+//Check HTTP request 
 describe('Check if http requests are handled correct', () => {
 
     afterEach(() => {
@@ -129,13 +131,15 @@ describe('Check if http requests are handled correct', () => {
 
     it('Fetches rides successfully', () => {
         axios.post.mockImplementation(() => ({
-            data: [{ id: 1, status: 'Share' }, { id: 2, status: 'Share' }]
+            data:
+                [{ id: 1, status: 'Share' },
+                { id: 2, status: 'Share' }]
         }));
         fetchAvailableRides();
         expect(setAvailableRides).toHaveBeenCalledWith([{ id: 1, status: 'Share' }, { id: 2, status: 'Share' }]);
     });
 
-    it('Handles fetch error', () => {
+    it('Handles error response', () => {
         axios.post.mockImplementation(() => {
             throw new Error('Failed to fetch rides');
         });
