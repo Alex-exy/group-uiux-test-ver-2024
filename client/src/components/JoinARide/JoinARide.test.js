@@ -8,15 +8,14 @@ import axios from 'axios';
 import { BrowserRouter as Router } from 'react-router-dom';
 
 
-describe('Renders DOM elements correctly', () => {
+describe('Renders DOM elements correct', () => {
     let wrapper;
     let store;
 
     beforeEach(() => {
-        // Create a store with the necessary reducer and preloaded state
         store = configureStore({
             reducer: {
-                ride: rideReducer, // Assuming rideReducer is a slice reducer for 'ride'
+                ride: rideReducer,
             },
             preloadedState: {
                 ride: {
@@ -48,50 +47,18 @@ describe('Renders DOM elements correctly', () => {
         let description = wrapper.find(".description").text();
         expect(description).toBe("Please click on the ride you want to join:");
     });
-
-    //Row Components
-    it("Should Booker cell rendered correctly", () => {
-        let cell = wrapper.find(".thisbooker").text();
-        expect(cell).toBe("Booker");
-    });
-
-    it("Should Destination cell rendered correctly", () => {
-        let cell = wrapper.find("#destination").text();
-        expect(cell).toBe("Destination");
-    });
-
-    it("Should Vehicle Type cell rendered correctly", () => {
-        let cell = wrapper.find("#type").text();
-        expect(cell).toBe("Vehicle Type");
-    });
-
-    it("Should Battery Remaining cell rendered correctly", () => {
-        let cell = wrapper.find("#battery").text();
-        expect(cell).toBe("Battery Remaining");
-    });
-
-    it("Should Distance to Vehicle cell rendered correctly", () => {
-        let cell = wrapper.find("#distance").text();
-        expect(cell).toBe("Distance to Vehicle");
-    });
-
-    it("Should Departure Time cell rendered correctly", () => {
-        let cell = wrapper.find("#time").text();
-        expect(cell).toBe("Departure Time");
-    });
 })
 
 //Table
-describe('Check the rows of the table', () => {
+describe('Check if table is displayed and working correct', () => {
 
     let wrapper;
     let store;
 
     beforeEach(() => {
-        // Create a store with the necessary reducer and preloaded state
         store = configureStore({
             reducer: {
-                ride: rideReducer, // Assuming rideReducer is a slice reducer for 'ride'
+                ride: rideReducer,
             },
             preloadedState: {
                 ride: {
@@ -117,13 +84,17 @@ describe('Check the rows of the table', () => {
         wrapper.unmount();
     });
 
-    //FIX 
-    it("Check if table row has six elements", () => {
-        let row = wrapper.find("#rideRow").first();
-        expect(row.find('#rideRow').length).toBeGreaterThan(0);
-        expect(row.children().length).toEqual(6);
-    });
-
+    //Table header and its components
+    it('Table header should contain six elements and a description of every element', () => {
+        let table = wrapper.find('CTableHeaderCell')
+        expect(table).toHaveLength(6);
+        expect(table.at(0).text()).toBe('Booker');
+        expect(table.at(1).text()).toBe('Destination');
+        expect(table.at(2).text()).toBe('Vehicle Type');
+        expect(table.at(3).text()).toBe('Battery Remaining');
+        expect(table.at(4).text()).toBe('Distance to Vehicle');
+        expect(table.at(5).text()).toBe('Departure Time');
+    })
 
     // FIX - mock function ?
     it("Check if redirected after click on Row", () => {
@@ -141,8 +112,8 @@ describe('Check the rows of the table', () => {
 
 //FIX - TypeError: _axios.default.post.mockImplementation is not a function
 
-//Fetching
-describe('Check if fetching rides works correctly', () => {
+//Check HTTP request
+describe('Check if http requests are handled correct', () => {
 
     afterEach(() => {
         jest.clearAllMocks();

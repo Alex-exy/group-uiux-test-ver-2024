@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setSelectedRide } from '../../store/rideSlice';
 
-const JoinARide = ({ isLoggedIn }) => {
+const JoinARide = () => {
     const [availableRides, setAvailableRides] = useState([]);
     const [loginInfo, setLoginInfo] = useState(false);
 

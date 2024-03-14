@@ -6,15 +6,14 @@ import { configureStore } from '@reduxjs/toolkit';
 import rideReducer from "../../store/rideSlice";
 import { BrowserRouter as Router } from 'react-router-dom';
 
-describe('Renders DOM elements correctly', () => {
+describe('Renders DOM elements correct', () => {
     let wrapper;
     let store;
 
     beforeEach(() => {
-        // Create a store with the necessary reducer and preloaded state
         store = configureStore({
             reducer: {
-                ride: rideReducer, // Assuming rideReducer is a slice reducer for 'ride'
+                ride: rideReducer,
             },
             preloadedState: {
                 ride: {
@@ -75,15 +74,14 @@ describe('Renders DOM elements correctly', () => {
 });
 
 //Buttons
-describe('Check button functionalities working as expected', () => {
+describe('Check buttons working as expected', () => {
     let wrapper;
     let store;
 
     beforeEach(() => {
-        // Create a store with the necessary reducer and preloaded state
         store = configureStore({
             reducer: {
-                ride: rideReducer, // Assuming rideReducer is a slice reducer for 'ride'
+                ride: rideReducer,
             },
             preloadedState: {
                 ride: {
@@ -105,7 +103,7 @@ describe('Check button functionalities working as expected', () => {
         wrapper.unmount();
     });
 
-    //FIX ?
+    //FIX 
     it("Confirm Button should set showApprovedModal true, approvealModal exists", () => {
         const confirmButton = wrapper.find("#confirmButton");
         confirmButton.simulate('click');
@@ -130,6 +128,11 @@ describe('Check button functionalities working as expected', () => {
     });
 });
 
+//Check HTTP request
+describe('Check if http response at confirm or cancle works correcty', () => {
+
+})
+
 
 //CModal Tests not working because of Testing Framework does not support rendering the CModal
 //Theoretical tests - Should work accordingly, but will not because of framework issues
@@ -137,10 +140,9 @@ describe('Check button functionalities working as expected', () => {
 /*
 describe('Check Approval CModal', () => {
     beforeEach(() => {
-        // Create a store with the necessary reducer and preloaded state
         store = configureStore({
             reducer: {
-                ride: rideReducer, // Assuming rideReducer is a slice reducer for 'ride'
+                ride: rideReducer,
             },
             preloadedState: {
                 ride: {
