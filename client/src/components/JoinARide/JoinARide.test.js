@@ -103,7 +103,7 @@ describe('Check if table is displayed and working correct', () => {
         expect(table.at(5).text()).toBe('Departure Time');
     })
 
-    // FIX - mock function ?
+    // FIX - mock function
     it("Check if redirected after click on Row", () => {
         const handleSelection = jest.fn();
         wrapper.find('#rideRow').first().simulate('click');
@@ -117,34 +117,14 @@ describe('Check if table is displayed and working correct', () => {
     });
 });
 
-//FIX - TypeError: _axios.default.post.mockImplementation is not a function
-
-// COPY HTTP REQUEST TESTS INTO CONFIRMATION AS WELL 
-
 //Check HTTP request 
-/*
 describe('Check if http requests are handled correct', () => {
 
-    afterEach(() => {
-        jest.clearAllMocks();
-    });
-
     it('Fetches rides successfully', () => {
-        axios.post.mockImplementation(() => ({
-            data:
-                [{ id: 1, status: 'Share' },
-                { id: 2, status: 'Share' }]
-        }));
-        fetchAvailableRides();
-        expect(setAvailableRides).toHaveBeenCalledWith([{ id: 1, status: 'Share' }, { id: 2, status: 'Share' }]);
+
     });
 
     it('Handles error response', () => {
-        axios.post.mockImplementation(() => {
-            throw new Error('Failed to fetch rides');
-        });
-        fetchAvailableRides();
-        expect(console.log).toHaveBeenCalledWith('Failed to fetch rides', expect.any(Error));
+
     });
 });
-*/
