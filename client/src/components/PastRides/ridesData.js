@@ -190,7 +190,7 @@ export const rides = [
     "imagePath": "https://upload.wikimedia.org/wikipedia/commons/9/9b/Fisker_Ocean_Motorworld_Munich_1X7A0079.jpg"
   },
   {
-    "person": "Noah",
+    "person": "Jacob",
     "time": "16:00",
     "date": "2024-03-20", 
     "model": "Bollinger B1",

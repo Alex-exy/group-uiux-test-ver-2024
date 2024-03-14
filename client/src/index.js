@@ -7,6 +7,7 @@ import { Provider } from 'react-redux';
 import { store } from './store/store';
 import { setAuthenticated } from './store/authSlice';
 import Keycloak from 'keycloak-js';
+import { setUser } from './store/authSlice';
 
 const keycloak = new Keycloak({
   url: 'https://sso.sexycoders.org/auth',
@@ -20,13 +21,38 @@ keycloak.init({ onLoad: 'check-sso' }).then((authenticated) => {
 
     store.dispatch(setAuthenticated({
       isAuthenticated: true,
-      user: keycloak.tokenParsed, // or any user detail you want to store
+      user: keycloak.tokenParsed, 
     }));
+
+    const refreshToken = async () => {
+      if (keycloak && authenticated) {
+        try {
+          const refreshed = await keycloak.updateToken(70);
+          console.log(refreshed);
+          if (refreshed) {
+            console.log('Token refreshed');
+          } else {
+            console.log('Token not refreshed, valid for ' + Math.round(keycloak.tokenParsed.exp + keycloak.timeSkew - new Date().getTime() / 1000) + ' seconds');
+          }
+        } catch (error) {
+          console.log('Failed to refresh token', error);
+        }
+      }
+    };
+
+    // Set up the token refresh to run periodically
+    setInterval(refreshToken, 60000); // Refresh every 1 minute 
+
+    var t = (({ family_name, given_name, preferred_username, email, sub }) => ({ family_name, given_name, preferred_username, email, sub }))(keycloak.tokenParsed);
+
+
+    store.dispatch(setUser(t));
+    console.log(t)
 
     ReactDOM.render(
       <Provider store={store}>
         <React.StrictMode>
-          <App keycloak={keycloak}/>
+          <App />
         </React.StrictMode>
       </Provider>,
       document.getElementById('root')
