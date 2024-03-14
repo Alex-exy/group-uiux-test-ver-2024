@@ -2,11 +2,12 @@ import React from 'react';
 import { mount } from "enzyme";
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import rideReducer from "../../store/rideSlice";
 import JoinARide from './JoinARide';
 import axios from 'axios';
-import { BrowserRouter as Router } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+
 
 describe('Renders DOM elements correct', () => {
     let wrapper;
@@ -95,24 +96,11 @@ describe('Check if table is displayed and working correct', () => {
         expect(table.at(4).text()).toBe('Distance to Vehicle');
         expect(table.at(5).text()).toBe('Departure Time');
     })
-
-
-    // FIX 
-    it("Check if redirected after click on Row", () => {
-        /*
-        const handleSelection = jest.fn();
-        wrapper.find('#rideRow').first().simulate('click');
-
-        
-        //const row = wrapper.find('#rideRow').first();
-        //row.simulate('click');
-        
-
-        expect(handleSelection).toHaveBeenCalled();
-        */
-    });
 });
 
+const mockHandleSelection = jest.fn().mockImplementation((ride) => {
+    return ride;
+});
 
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),
@@ -121,8 +109,6 @@ jest.mock('react-redux', () => ({
 
 //Table Row
 describe('Check if table rows are created as desired', () => {
-
-    let wrapper;
     let store;
 
     store = configureStore({
@@ -153,14 +139,6 @@ describe('Check if table rows are created as desired', () => {
         },
     ];
 
-    beforeEach(() => {
-        useSelector.mockReturnValue({
-            auth: {
-                user: { given_name: 'John' },
-            },
-        });
-    });
-
     afterEach(() => {
         useSelector.mockClear();
     });
@@ -177,6 +155,18 @@ describe('Check if table rows are created as desired', () => {
         expect(tableRows).toHaveLength(mockData.filter((ride) => ride.booker === 'Max').length);
     });
 
+    it('Calls handleSelection when clicking on row', () => {
+        const wrapper = mount(
+            <Provider store={store}>
+                <Router>
+                    <JoinARide availableRides={mockData} handleSelection={mockHandleSelection} />
+                </Router>
+            </Provider>
+        );
+        const tableRow = wrapper.find('CTableRow');
+        tableRow.simulate('click');
+        expect(mockHandleSelection).toHaveBeenCalled();
+    })
 });
 
 //Check HTTP request 

@@ -131,8 +131,7 @@ describe('Check if http requests are handled correct', () => {
 });
 
 //CModal *Components* not displaying as true because of testing framework issues
-//Should work accordingly but will display false instead  
-
+//Should work accordingly but will display false instead
 describe('Check Approval CModal', () => {
     let wrapper;
     let store;
