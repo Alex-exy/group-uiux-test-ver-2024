@@ -21,7 +21,7 @@ keycloak.init({ onLoad: 'check-sso' }).then((authenticated) => {
 
     store.dispatch(setAuthenticated({
       isAuthenticated: true,
-      user: keycloak.tokenParsed, // or any user detail you want to store
+      user: keycloak.tokenParsed, 
     }));
 
     const refreshToken = async () => {
@@ -41,19 +41,13 @@ keycloak.init({ onLoad: 'check-sso' }).then((authenticated) => {
     };
 
     // Set up the token refresh to run periodically
-    const refreshInterval = setInterval(refreshToken, 60000); // Refresh every 1 minute as an example
-    //refreshToken();
-
-    //var {family_name,given_name,preffered_username,email,sub}=(keycloak.tokenParsed);
-    //var t={family_name,given_name,preffered_username,email,sub};
+    setInterval(refreshToken, 60000); // Refresh every 1 minute 
 
     var t = (({ family_name, given_name, preferred_username, email, sub }) => ({ family_name, given_name, preferred_username, email, sub }))(keycloak.tokenParsed);
 
 
     store.dispatch(setUser(t));
     console.log(t)
-    //console.log(useSelector((state) => state.auth.user));
-    // Cleanup on component unmount
 
     ReactDOM.render(
       <Provider store={store}>
