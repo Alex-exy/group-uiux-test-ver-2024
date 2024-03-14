@@ -53,9 +53,15 @@ const ReserveARidePage = () => {
       allowJoin,
     };
 
-    axios.post('http://localhost:4000/confirmRide', rideInfo)
+    axios.post('http://localhost:4000/dummyConfirmation', rideInfo)
       .then((response) => {
-        console.log('Ride confirmed:', response.data);
+        if(response.data.status=="OK") {
+          alert('Ride confirmed: ', response.data)
+        }
+        else {
+          alert('Ride rejected:', response.data)
+          console.log('Ride rejected: ', response.data);
+        }
         navigate('/confirmation'); // Redirect to a confirmation page or back to listing
       })
       .catch((error) => {
