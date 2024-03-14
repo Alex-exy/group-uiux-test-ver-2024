@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { CModal, CModalHeader, CModalTitle, CModalBody, CModalFooter, CButton } from '@coreui/react';
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import rideSlice from "../../store/rideSlice";
 import axios from "axios";
 
 const Confirmation = () => {
@@ -28,14 +27,14 @@ const Confirmation = () => {
     const handleResponse = async () => {
         axios.post('http://localhost:4000/dummyConfirmation', rideInfo)
             .then((response => {
-                if (response.data.status == "OK") {
+                if (response.data.status === "OK") {
                     // response logic
                     alert(response.data); 
                     console.log('Request confirmed');
                 }
                 else {
                     alert(response.data);
-                    console.log('Request rejected ', error);
+                    console.log('Request rejected ');
                 }
             }))
             .catch((error) => {
