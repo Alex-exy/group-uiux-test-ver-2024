@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+
 import { CTable, CTableBody, CTableDataCell, CTableHead, CTableHeaderCell, CTableRow } from '@coreui/react';
 import { useSelector } from 'react-redux';
 import { rides } from './ridesData'; 
-import { useNavigate, useLocation} from 'react-router-dom';
+import { useNavigate} from 'react-router-dom';
 
 const PastRidesTable = () => {
   const currentUser = useSelector((state) => state.auth.user);

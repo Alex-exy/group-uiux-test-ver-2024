@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import PastRidesTable from "./past_rides/PastRidesTable"
-import PastRidesDetails from "./past_rides/PastRidesDetails"
+import PastRidesTable from "./PastRides/PastRidesTable"
+import PastRidesDetails from "./PastRides/PastRidesDetails"
 //import axios from "axios";
 
 // Import necessary components and hooks from react-router-dom
