@@ -1,4 +1,3 @@
-
 import { CTable, CTableBody, CTableDataCell, CTableHead, CTableHeaderCell, CTableRow } from '@coreui/react';
 import { useSelector } from 'react-redux';
 import { rides } from './ridesData'; 
@@ -9,8 +8,8 @@ const PastRidesTable = () => {
   const usersRides = rides.filter((ride) => ride.person === currentUser.given_name);
   const navigate = useNavigate();
  
-  const handleRowClick = (rideId) => {
-    navigate(`/past-rides-details`,{state:{data:rideId}});
+  const handleRowClick = (ride) => {
+    navigate(`/past-rides-details`,{state:{data:ride}});
   };
   
   return (
@@ -27,7 +26,7 @@ const PastRidesTable = () => {
         </CTableHead>
         <CTableBody>
           {usersRides.map((ride, index) => (
-            <CTableRow key={index} onClick={() => handleRowClick(ride)}>
+            <CTableRow  key={index} onClick={() => handleRowClick(ride)}>
               <CTableDataCell>{ride.person}</CTableDataCell>
               <CTableDataCell>{ride.time}</CTableDataCell>
               <CTableDataCell>{ride.date}</CTableDataCell>
