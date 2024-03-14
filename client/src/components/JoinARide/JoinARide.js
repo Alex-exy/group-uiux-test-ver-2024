@@ -82,7 +82,8 @@ const JoinARide = () => {
                 </CTableBody>
             </CTable>
 
-            { /* No Longer required
+            {
+            /* No Longer required
             <CModal visible={loginInfo} onClose={() => setLoginInfo(false)}>
                 <CModalHeader>
                     <CModalTitle>Please login to join a ride!</CModalTitle>
@@ -91,7 +92,8 @@ const JoinARide = () => {
                     <CButton color="primary" onClick={() => setLoginInfo(false)}>Ok</CButton>
                 </CModalFooter>
             </CModal >
-             */ }
+             */ 
+            }
         </div >
     );
 };

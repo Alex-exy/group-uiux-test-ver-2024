@@ -137,8 +137,10 @@ describe('Check if http response at confirm or cancle works correcty', () => {
 //CModal Tests not working because of Testing Framework does not support rendering the CModal
 //Theoretical tests - Should work accordingly, but will not because of framework issues
 
-/*
 describe('Check Approval CModal', () => {
+    let wrapper;
+    let store;
+
     beforeEach(() => {
         store = configureStore({
             reducer: {
@@ -163,8 +165,8 @@ describe('Check Approval CModal', () => {
     });
 
     it('Render approval Modal', () => {
-        const row = wrapper.find('.confirmButton');
-        row.simulate('click');
+        const button = wrapper.find('.confirmButton');
+        button.simulate('click');
         //Expected output would be true, due to mentioned framework issues is false
         expect(wrapper.find('#approvalModal').prop('visible')).toBe(true);
     });
@@ -193,10 +195,9 @@ describe('Check Approval CModal', () => {
 
 describe('Check Cancel CModal', () => {
     beforeEach(() => {
-        // Create a store with the necessary reducer and preloaded state
         store = configureStore({
             reducer: {
-                ride: rideReducer, // Assuming rideReducer is a slice reducer for 'ride'
+                ride: rideReducer,
             },
             preloadedState: {
                 ride: {
@@ -240,4 +241,3 @@ describe('Check Cancel CModal', () => {
         expect(wrapper.find('#cancelModal').prop('visible')).toBe(false);;
     });
 });
-*/

@@ -68,7 +68,15 @@ describe('Check if table is displayed and working correct', () => {
         });
 
         const availableRides = [
-            { id: 1, booker: 'Booker1', destination: 'Destination1', vehicleType: 'Type1', battery: 'Battery1', distanceToVehicle: 'Distance1', departureTime: 'Time1' },
+            {
+                id: 1,
+                booker: 'Booker1',
+                destination: 'Destination1',
+                vehicleType: 'Type1',
+                battery: 'Battery1',
+                distanceToVehicle: 'Distance1',
+                departureTime: 'Time1'
+            },
         ];
 
         wrapper = mount(
