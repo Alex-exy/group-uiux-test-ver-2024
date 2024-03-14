@@ -1,15 +1,15 @@
 import "./Confirmation.css";
 import { Link } from "react-router-dom";
-import { CModal, CModalHeader, CModalTitle, CModalBody, CModalFooter, CButton} from '@coreui/react';
+import { CModal, CModalHeader, CModalTitle, CModalBody, CModalFooter, CButton } from '@coreui/react';
 import React, { useState } from 'react';
 //import {selectedRide} from "../JoinARide/JoinARide";
-import {useSelector} from 'react-redux';
+import { useSelector } from 'react-redux';
+import rideSlice from "../../store/rideSlice";
 
 const Confirmation = () => {
 
-
-    const selectedRide = useSelector((state) => state.ride.selectedRide); 
-    console.log(selectedRide.booker);
+    const selectedRide = useSelector((state) => state.ride.selectedRide);
+    //console.log(selectedRide.booker);
 
     const [showApproveModal, setShowApproveModal] = useState(false);
     const [showCancleModal, setShowCancleModal] = useState(false);
@@ -31,37 +31,37 @@ const Confirmation = () => {
                 Summarized details of the selected ride:
             </div>
             <div className="detailList">
-                <p className="detName"> Booker: {selectedRide.booker}</p>
-                <p className="detDest"> To:</p>
-                <p className="detTime"> Leaves at:  </p>
+                <p className="detName">Booker: {selectedRide.booker} </p>
+                <p className="detDest">To: {selectedRide.destination} </p>
+                <p className="detTime">Leaves at: {selectedRide.time} </p>
             </div >
-            <button className="confirmButton" onClick={handleApproveModal}>
+            <button id="confirmButton" onClick={handleApproveModal}>
                 Confirm Joining
             </button>
-            <button className="cancelButton" onClick={handleCancleModal}>
+            <button id="cancelButton" onClick={handleCancleModal}>
                 Cancel Joining
             </button>
 
-            <CModal visible={showApproveModal} onClose={() => setShowApproveModal(false)}>
+            <CModal id="approvalModal" visible={showApproveModal} onClose={() => setShowApproveModal(false)}>
                 <CModalHeader>
-                    <CModalTitle>Joining Approved! </CModalTitle>
+                    <CModalTitle id="approvalHeader">Joining Approved!</CModalTitle>
                 </CModalHeader>
-                <CModalBody> You will be redirected back to the Join-a-Ride page . . . </CModalBody>
+                <CModalBody id="approvalBody"> You will be redirected back to the Join-a-Ride page . . . </CModalBody>
                 <CModalFooter>
                     <Link to={`/join-a-ride`}>
-                        <CButton color="primary" onClick={() => setShowApproveModal(false)}>Ok</CButton>
+                        <CButton id="approvalOkButton" color="primary" onClick={() => setShowApproveModal(false)}>Ok</CButton>
                     </Link>
                 </CModalFooter>
             </CModal >
 
-            <CModal visible={showCancleModal} onClose={() => setShowCancleModal(false)}>
+            <CModal id="cancelModal" visible={showCancleModal} onClose={() => setShowCancleModal(false)}>
                 <CModalHeader>
-                    <CModalTitle>Joining Canceled! </CModalTitle>
+                    <CModalTitle id="cancelHeader">Joining Canceled!</CModalTitle>
                 </CModalHeader>
-                <CModalBody> You will be redirected back to the Join-a-Ride page . . . </CModalBody>
+                <CModalBody id="cancelBody"> You will be redirected back to the Join-a-Ride page . . . </CModalBody>
                 <CModalFooter>
                     <Link to={`/join-a-ride`}>
-                        <CButton color="primary" onClick={() => setShowCancleModal(false)}>Ok</CButton>
+                        <CButton id="cancelOkButton" color="primary" onClick={() => setShowCancleModal(false)}>Ok</CButton>
                     </Link>
                 </CModalFooter>
             </CModal >
