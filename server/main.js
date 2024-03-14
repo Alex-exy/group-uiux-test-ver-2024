@@ -2,7 +2,7 @@ import express from 'express';
 import cors from "cors";
 import bodyParser from 'body-parser';
 
-import rideData from "./ridesData.js";
+//import rideData from "./ridesData.js";
 
 const app = express();
 app.use(cors()); // Enable All CORS Requests
