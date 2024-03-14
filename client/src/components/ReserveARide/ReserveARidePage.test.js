@@ -7,7 +7,7 @@ describe('ReserveARidePage Component', () => {
   let wrapper = null;
 
   beforeEach(() => {
-    wrapper = shallow(
+    wrapper = mount(
       <Router>
         <ReserveARidePage />
       </Router>
@@ -19,5 +19,10 @@ describe('ReserveARidePage Component', () => {
     expect(wrapper.exists()).toBe(true);
   });
 
+  // Test 02: Initial Step Rendering
+  it('renders the initial step correctly', () => {
+    const stepOneText = 'Are you sure you want to reserve this ride?';
+    expect(wrapper.contains(stepOneText)).toBe(true);
+  });
   
 });
