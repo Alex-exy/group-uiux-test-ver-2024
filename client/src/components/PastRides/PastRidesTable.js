@@ -1,9 +1,10 @@
 import { CTable, CTableBody, CTableDataCell, CTableHead, CTableHeaderCell, CTableRow } from '@coreui/react';
-import { useSelector } from 'react-redux';
+import { useSelector} from 'react-redux';
 import { rides } from './ridesData'; 
 import { useNavigate} from 'react-router-dom';
 
 const PastRidesTable = () => {
+
   const currentUser = useSelector((state) => state.auth.user);
   const usersRides = rides.filter((ride) => ride.person === currentUser.given_name);
   const navigate = useNavigate();
