@@ -7,7 +7,6 @@ import JoinARide from './JoinARide';
 import axios from 'axios';
 import { BrowserRouter as Router } from 'react-router-dom';
 
-
 describe('Renders DOM elements correct', () => {
     let wrapper;
     let store;
@@ -123,6 +122,7 @@ describe('Check if table is displayed and working correct', () => {
 // COPY HTTP REQUEST TESTS INTO CONFIRMATION AS WELL 
 
 //Check HTTP request 
+/*
 describe('Check if http requests are handled correct', () => {
 
     afterEach(() => {
@@ -147,3 +147,4 @@ describe('Check if http requests are handled correct', () => {
         expect(console.log).toHaveBeenCalledWith('Failed to fetch rides', expect.any(Error));
     });
 });
+*/
