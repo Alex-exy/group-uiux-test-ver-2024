@@ -1,18 +1,19 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
-import ReserveARide from './reservearide';
+import ReserveARidePage from './ReserveARidePage';
 import { useSelector } from 'react-redux';
 /*
 jest.mock('react-redux', () => ({
   useSelector: jest.fn(),
 }));
 */
+
 describe('ReserveARide Component', () => {
   let wrapper = null;
 
   beforeEach(() => {
     //useSelector.mockReturnValue({ auth: { user: { given_name: 'John Doe' } } }); //Not required for this component, at the moment
-    wrapper = shallow(<ReserveARide />);
+    wrapper = shallow(<ReserveARidePage />);
   });
 
   // Test 01
@@ -49,5 +50,5 @@ describe('ReserveARide Component', () => {
 
     expect(wrapper.find('CModal').prop('visible')).toBe(true);
   });
-  */
+  
 });
