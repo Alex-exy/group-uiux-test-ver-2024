@@ -55,14 +55,14 @@ const ReserveARidePage = () => {
 
     axios.post('http://localhost:4000/dummyConfirmation', rideInfo)
       .then((response) => {
-        if(response.data.status=="OK") {
-          alert('Ride confirmed: ', response.data)
+        if(response.data=="OK") {
+          alert('Ride confirmed.');
         }
         else {
-          alert('Ride rejected:', response.data)
+          alert('There was an error confirming your ride please try again or contact support.');
           console.log('Ride rejected: ', response.data);
         }
-        navigate('/confirmation'); // Redirect to a confirmation page or back to listing
+        navigate('/'); // Redirect to a confirmation page or back to listing
       })
       .catch((error) => {
         console.error('Failed to confirm ride:', error);

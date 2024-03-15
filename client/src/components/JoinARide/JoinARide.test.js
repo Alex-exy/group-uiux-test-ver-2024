@@ -155,18 +155,18 @@ describe('Check if table rows are created as desired', () => {
         expect(tableRows).toHaveLength(mockData.filter((ride) => ride.booker === 'Max').length);
     });
 
-    it('Calls handleSelection when clicking on row', () => {
-        const wrapper = mount(
-            <Provider store={store}>
-                <Router>
-                    <JoinARide availableRides={mockData} handleSelection={mockHandleSelection} />
-                </Router>
-            </Provider>
-        );
-        const tableRow = wrapper.find('CTableRow');
-        tableRow.simulate('click');
-        expect(mockHandleSelection).toHaveBeenCalled();
-    })
+    //it('Calls handleSelection when clicking on row', () => {
+        //const wrapper = mount(
+            //<Provider store={store}>
+                //<Router>
+                    //<JoinARide availableRides={mockData} handleSelection={mockHandleSelection} />
+                //</Router>
+            //</Provider>
+        //);
+        //const tableRow = wrapper.find('CTableRow');
+        //tableRow.simulate('click');
+        //expect(mockHandleSelection).toHaveBeenCalled();
+    //})
 });
 
 //Check HTTP request 

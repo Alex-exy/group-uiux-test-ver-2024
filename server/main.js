@@ -25,6 +25,11 @@ async function main() {
                 //res.status(500).json({ error: 'An error occurred while fetching rides', details: err });
             //}
         });
+        app.post('/dummyConfirmation', async (req, res) => {
+            //try {
+                res.send('OK');
+            //}
+        });
     //try {
         // Connect the client to the server
         //await client.connect();
@@ -70,8 +75,3 @@ app.listen(port, () => {
     main().catch(console.error);
 });
 
-// Properly handle close events
-process.on('SIGINT', async () => {
-    await client.close();
-    process.exit(0);
-});

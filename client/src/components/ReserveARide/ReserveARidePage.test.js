@@ -5,6 +5,7 @@ import ReserveARidePage from './ReserveARidePage';
 
 describe('ReserveARidePage Component', () => {
   let wrapper = null;
+  window.alert = jest.fn()
 
   beforeEach(() => {
     wrapper = mount(

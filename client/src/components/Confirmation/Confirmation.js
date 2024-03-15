@@ -27,14 +27,11 @@ const Confirmation = () => {
     const handleResponse = async () => {
         axios.post('http://localhost:4000/dummyConfirmation', rideInfo)
             .then((response => {
-                if (response.data.status === "OK") {
-                    // response logic
-                    alert(response.data);
-                    console.log('Request confirmed');
+                if (response.data === "OK") {
+                    alert('Request confirmed.');
                 }
                 else {
-                    alert(response.data);
-                    console.log('Request rejected ');
+                    alert('Request Rejected');
                 }
             }))
             .catch((error) => {
