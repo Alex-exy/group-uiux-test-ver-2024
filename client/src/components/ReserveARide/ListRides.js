@@ -25,6 +25,16 @@ const ListRides = () => {
     const handleRowClick = (vehicle) => {
       navigate('/reserve-a-ride', { state:{selectedRide: vehicle }});
     };
+
+    // Render a default row if no vehicles are available
+    const renderDefaultRow = () => (
+      <CTableRow>
+        <CTableDataCell>Bike</CTableDataCell>
+        <CTableDataCell>5km</CTableDataCell>
+        <CTableDataCell>90%</CTableDataCell>
+        <CTableDataCell>Additional info</CTableDataCell>
+      </CTableRow>
+    );
   
     return (
       <div>
@@ -39,6 +49,7 @@ const ListRides = () => {
             </CTableRow>
           </CTableHead>
           <CTableBody>
+            {vehicles.length === 0 && renderDefaultRow()}
             {vehicles.map((vehicle) => (
               <CTableRow key={vehicle.id} onClick={() => handleRowClick(vehicle)}>
                 <CTableDataCell>{vehicle.type}</CTableDataCell>
