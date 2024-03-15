@@ -27,15 +27,17 @@ const ListRides = () => {
     };
 
     // Render a default row if no vehicles are available
+    
+    const testVehicle = { id: 99999, type: 'TestVehicle', distance: '10km', battery: '100%', info: 'This is a non-renable dev test vehicle' };
     const renderDefaultRow = () => (
-      <CTableRow>
-        <CTableDataCell>Bike</CTableDataCell>
-        <CTableDataCell>5km</CTableDataCell>
-        <CTableDataCell>90%</CTableDataCell>
-        <CTableDataCell>Additional info</CTableDataCell>
+      <CTableRow key = {testVehicle.id} onClick={() => handleRowClick(testVehicle)}>
+        <CTableDataCell>{testVehicle.type}</CTableDataCell>
+        <CTableDataCell>{testVehicle.distance}</CTableDataCell>
+        <CTableDataCell>{testVehicle.battery}</CTableDataCell>
+        <CTableDataCell>{testVehicle.info}</CTableDataCell>
       </CTableRow>
     );
-  
+
     return (
       <div>
         <h2>List of Rides</h2>
@@ -49,7 +51,7 @@ const ListRides = () => {
             </CTableRow>
           </CTableHead>
           <CTableBody>
-            {vehicles.length === 0 && renderDefaultRow()}
+          {vehicles.length === 0 && renderDefaultRow()}
             {vehicles.map((vehicle) => (
               <CTableRow key={vehicle.id} onClick={() => handleRowClick(vehicle)}>
                 <CTableDataCell>{vehicle.type}</CTableDataCell>
