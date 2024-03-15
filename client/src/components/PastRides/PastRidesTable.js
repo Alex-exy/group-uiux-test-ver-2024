@@ -1,12 +1,30 @@
 import { CTable, CTableBody, CTableDataCell, CTableHead, CTableHeaderCell, CTableRow } from '@coreui/react';
 import { useSelector} from 'react-redux';
-import { rides } from './ridesData'; 
+import axios from "axios"; 
 import { useNavigate} from 'react-router-dom';
+import { useEffect,useState } from 'react';
 
 const PastRidesTable = () => {
 
   const currentUser = useSelector((state) => state.auth.user);
-  const usersRides = rides.filter((ride) => ride.person === currentUser.given_name);
+
+  const [rides, setRides] = useState([]);
+  useEffect(() => {
+    const fetchRides = async () => {
+      try {
+        const rides = await axios.post('http://localhost:4000/getPreviousRides', {});;
+        const usersRides = rides.data.rideData.filter((ride) => ride.person === currentUser.given_name);
+        setRides(usersRides);
+      } catch (error) {
+        console.error('Failed to fetch rides:', error);
+      }
+    };
+
+    fetchRides();
+  }, [currentUser.given_name]);
+  
+  
+
   const navigate = useNavigate();
  
   const handleRowClick = (ride) => {
@@ -26,7 +44,7 @@ const PastRidesTable = () => {
           </CTableRow>
         </CTableHead>
         <CTableBody>
-          {usersRides.map((ride, index) => (
+          {rides.map((ride, index) => (
             <CTableRow  key={index} onClick={() => handleRowClick(ride)}>
               <CTableDataCell>{ride.person}</CTableDataCell>
               <CTableDataCell>{ride.time}</CTableDataCell>
