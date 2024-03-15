@@ -55,10 +55,12 @@ describe('PastRidesTable', () => {
     expect(headerCells.at(3).text()).toBe('Vehicle Model');
   });
 
+
   it('renders a table row for the ride of the selected user', () => {
     const wrapper = mount(<PastRidesTable />);
     const tableRows = wrapper.find('CTableRow');
     expect(tableRows).toHaveLength(rides.filter((ride) => ride.person === 'John').length); 
   });
+
 
 });

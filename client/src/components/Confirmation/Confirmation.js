@@ -1,15 +1,13 @@
 import "./Confirmation.css";
 import { Link } from "react-router-dom";
-import { CModal, CModalHeader, CModalTitle, CModalBody, CModalFooter, CButton} from '@coreui/react';
+import { CModal, CModalHeader, CModalTitle, CModalBody, CModalFooter, CButton } from '@coreui/react';
 import React, { useState } from 'react';
-//import {selectedRide} from "../JoinARide/JoinARide";
-import {useSelector} from 'react-redux';
+import { useSelector } from 'react-redux';
+import axios from "axios";
 
 const Confirmation = () => {
 
-
-    const selectedRide = useSelector((state) => state.ride.selectedRide); 
-    console.log(selectedRide.booker);
+    const selectedRide = useSelector((state) => state.ride.selectedRide);
 
     const [showApproveModal, setShowApproveModal] = useState(false);
     const [showCancleModal, setShowCancleModal] = useState(false);
@@ -22,6 +20,28 @@ const Confirmation = () => {
         setShowCancleModal(true);
     }
 
+    const rideInfo = {
+
+    };
+
+    const handleResponse = async () => {
+        axios.post('http://localhost:4000/dummyConfirmation', rideInfo)
+            .then((response => {
+                if (response.data.status === "OK") {
+                    // response logic
+                    alert(response.data); 
+                    console.log('Request confirmed');
+                }
+                else {
+                    alert(response.data);
+                    console.log('Request rejected ');
+                }
+            }))
+            .catch((error) => {
+                console.log('Request failed', error);
+            });
+    };
+
     return (
         <div className="background" >
             <h2 className="header">
@@ -31,37 +51,37 @@ const Confirmation = () => {
                 Summarized details of the selected ride:
             </div>
             <div className="detailList">
-                <p className="detName"> Booker: {selectedRide.booker}</p>
-                <p className="detDest"> To:</p>
-                <p className="detTime"> Leaves at:  </p>
+                <p className="detName">Booker: {selectedRide.booker} </p>
+                <p className="detDest">To: {selectedRide.destination} </p>
+                <p className="detTime">Leaves at: {selectedRide.departureTime} </p>
             </div >
-            <button className="confirmButton" onClick={handleApproveModal}>
+            <button id="confirmButton" onClick={() => { handleApproveModal(); handleResponse() }}>
                 Confirm Joining
             </button>
-            <button className="cancelButton" onClick={handleCancleModal}>
+            <button id="cancelButton" onClick={() => { handleCancleModal(); handleResponse() }}>
                 Cancel Joining
             </button>
 
-            <CModal visible={showApproveModal} onClose={() => setShowApproveModal(false)}>
+            <CModal id="approvalModal" visible={showApproveModal} onClose={() => setShowApproveModal(false)}>
                 <CModalHeader>
-                    <CModalTitle>Joining Approved! </CModalTitle>
+                    <CModalTitle id="approvalHeader">Joining Approved!</CModalTitle>
                 </CModalHeader>
-                <CModalBody> You will be redirected back to the Join-a-Ride page . . . </CModalBody>
+                <CModalBody id="approvalBody">You will be redirected back to the Join-a-Ride page . . .</CModalBody>
                 <CModalFooter>
                     <Link to={`/join-a-ride`}>
-                        <CButton color="primary" onClick={() => setShowApproveModal(false)}>Ok</CButton>
+                        <CButton id="approvalOkButton" color="primary" onClick={() => setShowApproveModal(false)}>Ok</CButton>
                     </Link>
                 </CModalFooter>
             </CModal >
 
-            <CModal visible={showCancleModal} onClose={() => setShowCancleModal(false)}>
+            <CModal id="cancelModal" visible={showCancleModal} onClose={() => setShowCancleModal(false)}>
                 <CModalHeader>
-                    <CModalTitle>Joining Canceled! </CModalTitle>
+                    <CModalTitle id="cancelHeader">Joining Canceled!</CModalTitle>
                 </CModalHeader>
-                <CModalBody> You will be redirected back to the Join-a-Ride page . . . </CModalBody>
+                <CModalBody id="cancelBody">You will be redirected back to the Join-a-Ride page . . .</CModalBody>
                 <CModalFooter>
                     <Link to={`/join-a-ride`}>
-                        <CButton color="primary" onClick={() => setShowCancleModal(false)}>Ok</CButton>
+                        <CButton id="cancelOkButton" color="primary" onClick={() => setShowCancleModal(false)}>Ok</CButton>
                     </Link>
                 </CModalFooter>
             </CModal >

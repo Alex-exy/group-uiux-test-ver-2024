@@ -6,15 +6,18 @@ import PastRidesDetails from "./PastRides/PastRidesDetails"
 // Import necessary components and hooks from react-router-dom
 import { BrowserRouter as Router, Routes, Route, NavLink } from 'react-router-dom';
 import { CNavbar, CContainer, CNavbarBrand, CNavbarToggler, CCollapse, CNavItem, CNavbarNav} from '@coreui/react';
-import Profile from './Profile';
+import Profile from './Profile/Profile';
 import userProfile from './john_doe.jpeg';
 
-import ReserveARide from './reservearide';
+import ReserveARide from './ReserveARide/reservearide';
 
 
 // login button 
 import JoinARide from './JoinARide/JoinARide';
 import Confirmation from './Confirmation/Confirmation';
+
+import ReserveARidePage from './ReserveARide/ReserveARidePage';
+import ListRides from './ReserveARide/ListRides';
 
 
 const Pricing = () => <div>Pricing</div>;
@@ -38,7 +41,7 @@ function NavBar() {
             <CCollapse className="navbar-collapse" visible={visible}>
               <CNavbarNav>
                 <CNavItem>
-                  <NavLink to="/reserve-a-ride" className="nav-link" activeClassName="active">
+                  <NavLink to="/list-rides" className="nav-link" activeClassName="active">
                     Reserve a Ride
                   </NavLink>
                 </CNavItem>
@@ -77,14 +80,14 @@ function NavBar() {
         {/* Define Routes */}
         <Routes>
           <Route path="/" element={<JoinARide />} />
-          <Route path="/reserve-a-ride" element={<ReserveARide />} />
-          {/* is loading missing */}
+          <Route path="/list-rides" element={<ListRides />} />
           <Route path="/join-a-ride" element={<JoinARide/>} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/past-rides-table" element={<PastRidesTable />} />
           <Route path="/past-rides-details" element={<PastRidesDetails />} />
           <Route path="/confirm-joining/:id/:type" element={<Confirmation />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/reserve-a-ride" element={<ReserveARidePage />} />
           <Route path="*" element={<h4 className='error'> Page not existent </h4>} />
         </Routes>
       </>

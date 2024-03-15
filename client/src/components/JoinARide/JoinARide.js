@@ -1,20 +1,18 @@
 import "./JoinARide.css";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { CTable, CTableBody, CTableDataCell, CTableHead, CTableHeaderCell, CTableRow, CModal, CModalHeader, CModalTitle,CModalFooter, CButton} from '@coreui/react';
+import { CTable, CTableBody, CTableDataCell, CTableHead, CTableHeaderCell, CTableRow, CModal, CModalHeader, CModalTitle, CModalFooter, CButton } from '@coreui/react';
 import { useNavigate } from "react-router-dom";
-import {useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
 import { setSelectedRide } from '../../store/rideSlice';
 
-
-const JoinARide = ({ isLoggedIn }) => {
+const JoinARide = () => {
     const [availableRides, setAvailableRides] = useState([]);
     const [loginInfo, setLoginInfo] = useState(false);
-    //const [selectedRide, setSelectedRide] = useState(null)
 
     const navigate = useNavigate();
 
-    const dispatch=useDispatch();
+    const dispatch = useDispatch();
     useEffect(() => {
         const fetchAvailableRides = async () => {
             try {
@@ -29,22 +27,10 @@ const JoinARide = ({ isLoggedIn }) => {
         fetchAvailableRides();
     }, []);
 
-
-    //// Will be replaced 
-    //useEffect(() => {
-    //}, [isLoggedIn]);
-
-
     const handleSelection = (ride) => {
-
-        //setSelectedRide(ride);
+        //Cannot log after tests are done. Did you forget to wait for something async in your test?    
         dispatch(setSelectedRide(ride));
-
-        //if (isLoggedIn) {
-            navigate(`/confirm-joining/${ride.id}/Confirm`);
-        //} else {
-            //handleLoginInfo();
-        //}
+        navigate(`/confirm-joining/${ride.id}/Confirm`);
     };
 
     const handleLoginInfo = () => {
@@ -61,34 +47,34 @@ const JoinARide = ({ isLoggedIn }) => {
             </h4>
             <CTable hover responsive>
                 <CTableHead>
-                    <CTableRow>
-                        <CTableHeaderCell>Booker</CTableHeaderCell>
-                        <CTableHeaderCell>Destination</CTableHeaderCell>
-                        <CTableHeaderCell>Vehicle Type</CTableHeaderCell>
-                        <CTableHeaderCell>Battery Remaining</CTableHeaderCell>
-                        <CTableHeaderCell>Distance to Vehicle</CTableHeaderCell>
-                        <CTableHeaderCell>Departure Time</CTableHeaderCell>
+                    <CTableRow id="table">
+                        <CTableHeaderCell className="thisbooker">Booker</CTableHeaderCell>
+                        <CTableHeaderCell id="destination">Destination</CTableHeaderCell>
+                        <CTableHeaderCell id="type">Vehicle Type</CTableHeaderCell>
+                        <CTableHeaderCell id="battery">Battery Remaining</CTableHeaderCell>
+                        <CTableHeaderCell id="distance">Distance to Vehicle</CTableHeaderCell>
+                        <CTableHeaderCell id="time">Departure Time</CTableHeaderCell>
                     </CTableRow>
                 </CTableHead>
                 <CTableBody>
                     {availableRides.map((ride) => (
-                        <CTableRow key={ride.id} onClick={() => handleSelection(ride)}>
-                            <CTableDataCell>
+                        <CTableRow id="rideRow" key={ride.id} onClick={() => handleSelection(ride)}>
+                            <CTableDataCell id="cellBooker">
                                 {ride.booker}
                             </CTableDataCell>
-                            <CTableDataCell>
+                            <CTableDataCell id="cellDestination">
                                 {ride.destination}
                             </CTableDataCell>
-                            <CTableDataCell>
+                            <CTableDataCell id="cellType">
                                 {ride.vehicleType}
                             </CTableDataCell>
-                            <CTableDataCell>
+                            <CTableDataCell id="cellBattery">
                                 {ride.battery}
                             </CTableDataCell>
-                            <CTableDataCell>
+                            <CTableDataCell id="cellDistance">
                                 {ride.distanceToVehicle}
                             </CTableDataCell>
-                            <CTableDataCell>
+                            <CTableDataCell id="cellTime">
                                 {ride.departureTime}
                             </CTableDataCell>
                         </CTableRow>
@@ -96,6 +82,8 @@ const JoinARide = ({ isLoggedIn }) => {
                 </CTableBody>
             </CTable>
 
+            {
+            /* No Longer required
             <CModal visible={loginInfo} onClose={() => setLoginInfo(false)}>
                 <CModalHeader>
                     <CModalTitle>Please login to join a ride!</CModalTitle>
@@ -104,6 +92,8 @@ const JoinARide = ({ isLoggedIn }) => {
                     <CButton color="primary" onClick={() => setLoginInfo(false)}>Ok</CButton>
                 </CModalFooter>
             </CModal >
+             */ 
+            }
         </div >
     );
 };

@@ -190,7 +190,7 @@ export default [
     "imagePath": "https://upload.wikimedia.org/wikipedia/commons/9/9b/Fisker_Ocean_Motorworld_Munich_1X7A0079.jpg"
   },
   {
-    "person": "Jacob",
+    "person": "Noah",
     "time": "16:00",
     "date": "2024-03-20", 
     "model": "Bollinger B1",
@@ -200,4 +200,3 @@ export default [
     "imagePath": "https://upload.wikimedia.org/wikipedia/commons/5/53/Bollinger_B1%2C_front_left_%28Greenwich_Concours%29.jpg"
   }
 ];
-  
