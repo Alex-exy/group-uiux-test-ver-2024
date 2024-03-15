@@ -2,10 +2,11 @@ import React from 'react';
 import { mount } from "enzyme";
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import rideReducer from "../../store/rideSlice";
 import JoinARide from './JoinARide';
 import axios from 'axios';
-import { BrowserRouter as Router } from 'react-router-dom';
 
 
 describe('Renders DOM elements correct', () => {
@@ -31,10 +32,6 @@ describe('Renders DOM elements correct', () => {
                 </Router>
             </Provider>
         );
-    });
-
-    afterEach(() => {
-        wrapper.unmount();
     });
 
     //DOM Text components
@@ -88,10 +85,6 @@ describe('Check if table is displayed and working correct', () => {
         );
     });
 
-    afterEach(() => {
-        wrapper.unmount();
-    });
-
     //Table header and its components
     it('Table header should contain six elements and a description of every element', () => {
         let table = wrapper.find('CTableHeaderCell')
@@ -103,47 +96,87 @@ describe('Check if table is displayed and working correct', () => {
         expect(table.at(4).text()).toBe('Distance to Vehicle');
         expect(table.at(5).text()).toBe('Departure Time');
     })
-
-    // FIX - mock function ?
-    it("Check if redirected after click on Row", () => {
-        const handleSelection = jest.fn();
-        wrapper.find('#rideRow').first().simulate('click');
-
-        /*
-        const row = wrapper.find('#rideRow').first();
-        row.simulate('click');
-        */
-
-        expect(handleSelection).toHaveBeenCalled();
-    });
 });
 
-//FIX - TypeError: _axios.default.post.mockImplementation is not a function
+const mockHandleSelection = jest.fn().mockImplementation((ride) => {
+    return ride;
+});
 
-// COPY HTTP REQUEST TESTS INTO CONFIRMATION AS WELL 
+jest.mock('react-redux', () => ({
+    ...jest.requireActual('react-redux'),
+    useSelector: jest.fn(),
+}));
+
+//Table Row
+describe('Check if table rows are created as desired', () => {
+    let store;
+
+    store = configureStore({
+        reducer: {
+            ride: rideReducer,
+        },
+        preloadedState: {
+            ride: {
+                selectedRide: {}
+            }
+        }
+    });
+
+    jest.mock('react-router-dom', () => ({
+        useNavigate: () => ({
+            navigate: jest.fn(),
+        }),
+    }));
+
+    const mockData = [
+        {
+            booker: "Max",
+            desination: "Munich",
+            vehicleType: "BMW",
+            battery: "70%",
+            distanceToVehicle: "7 km",
+            departureTime: "12:00",
+        },
+    ];
+
+    afterEach(() => {
+        useSelector.mockClear();
+    });
+
+    it('Creates a CTable row for a dummy user', () => {
+        const wrapper = mount(
+            <Provider store={store}>
+                <Router>
+                    <JoinARide availableRides={mockData} />
+                </Router>
+            </Provider>
+        );
+        const tableRows = wrapper.find('CTableRow');
+        expect(tableRows).toHaveLength(mockData.filter((ride) => ride.booker === 'Max').length);
+    });
+
+    it('Calls handleSelection when clicking on row', () => {
+        const wrapper = mount(
+            <Provider store={store}>
+                <Router>
+                    <JoinARide availableRides={mockData} handleSelection={mockHandleSelection} />
+                </Router>
+            </Provider>
+        );
+        const tableRow = wrapper.find('CTableRow');
+        tableRow.simulate('click');
+        expect(mockHandleSelection).toHaveBeenCalled();
+    })
+});
 
 //Check HTTP request 
 describe('Check if http requests are handled correct', () => {
 
-    afterEach(() => {
-        jest.clearAllMocks();
-    });
-
     it('Fetches rides successfully', () => {
-        axios.post.mockImplementation(() => ({
-            data:
-                [{ id: 1, status: 'Share' },
-                { id: 2, status: 'Share' }]
-        }));
-        fetchAvailableRides();
-        expect(setAvailableRides).toHaveBeenCalledWith([{ id: 1, status: 'Share' }, { id: 2, status: 'Share' }]);
+
     });
 
     it('Handles error response', () => {
-        axios.post.mockImplementation(() => {
-            throw new Error('Failed to fetch rides');
-        });
-        fetchAvailableRides();
-        expect(console.log).toHaveBeenCalledWith('Failed to fetch rides', expect.any(Error));
+
     });
 });

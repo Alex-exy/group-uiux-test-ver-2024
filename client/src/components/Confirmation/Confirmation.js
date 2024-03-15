@@ -29,7 +29,7 @@ const Confirmation = () => {
             .then((response => {
                 if (response.data.status === "OK") {
                     // response logic
-                    alert(response.data); 
+                    alert(response.data);
                     console.log('Request confirmed');
                 }
                 else {
@@ -85,6 +85,7 @@ const Confirmation = () => {
                     </Link>
                 </CModalFooter>
             </CModal >
+            */
         </div >
     );
 };
