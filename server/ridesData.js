@@ -200,4 +200,3 @@ export default [
     "imagePath": "https://upload.wikimedia.org/wikipedia/commons/5/53/Bollinger_B1%2C_front_left_%28Greenwich_Concours%29.jpg"
   }
 ];
-  

@@ -20,7 +20,7 @@ import ReserveARidePage from './ReserveARide/ReserveARidePage';
 import ListRides from './ReserveARide/ListRides';
 
 
-const Pricing = () => <div>Pricing</div>;
+const Pricing = () => <div>A pricing page just to demonstrate basic static text pages.</div>;
 
 // -------------------------------------------------------
 

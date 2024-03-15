@@ -28,7 +28,7 @@ const JoinARide = () => {
     }, []);
 
     const handleSelection = (ride) => {
-        //Cannot log after tests are done. Did you forget to wait for something async in your test?    
+        //Cannot log after tests are done.  
         dispatch(setSelectedRide(ride));
         navigate(`/confirm-joining/${ride.id}/Confirm`);
     };
