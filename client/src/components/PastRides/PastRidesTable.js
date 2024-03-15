@@ -13,7 +13,7 @@ const PastRidesTable = () => {
     const fetchRides = async () => {
       try {
         const rides = await axios.post('http://localhost:4000/getPreviousRides', {});;
-        const usersRides = rides.data.rideData.filter((ride) => ride.person === currentUser.given_name);
+        const usersRides = rides?.data.rideData.filter((ride) => ride.person === currentUser.given_name);
         setRides(usersRides);
       } catch (error) {
         console.error('Failed to fetch rides:', error);
