@@ -1,0 +1,129 @@
+// Import necessary modules and components for testing
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import { act } from 'react-dom/test-utils';
+import { store } from './store/store';
+import App from './App';
+import Keycloak from 'keycloak-js';
+import { setAuthenticated, setUser } from './store/authSlice';
+
+// Mock modules and global functions
+jest.mock('react-dom', () => ({ render: jest.fn() }));
+// Mock the Keycloak module
+jest.mock('keycloak-js', () => {
+  return jest.fn().mockImplementation(() => ({
+    init: jest.fn().mockResolvedValue(true),
+    updateToken: jest.fn().mockResolvedValue(true),
+    login: jest.fn(), // Ensure this mock is correctly implemented
+    tokenParsed: {
+      family_name: 'Doe',
+      given_name: 'John',
+      preferred_username: 'johndoe',
+      email: 'john@doe.com',
+      sub: '1234',
+    },
+  }));
+});
+
+
+describe('Index.js', () => {
+  // Set up a fake Keycloak instance and user details
+  const mockUserDetails = {
+    family_name: 'Doe',
+    given_name: 'John',
+    preferred_username: 'johndoe',
+    email: 'john@doe.com',
+    sub: '1234'
+  };
+  
+  const mockKeycloakInstance = {
+    init: jest.fn(() => Promise.resolve(true)),
+    tokenParsed: mockUserDetails,
+    updateToken: jest.fn(() => Promise.resolve(true)),
+  };
+
+  Keycloak.mockImplementation(() => mockKeycloakInstance);
+
+  beforeEach(async() => {
+      jest.useFakeTimers();
+    jest.resetModules(); // Clears the cache of modules
+  jest.resetModules(); // Clears the cache of modules
+    // Reset mocks before each test
+    ReactDOM.render.mockClear();
+    store.dispatch = jest.fn();
+    await act(async () => {
+      require('./index'); // This will execute the code inside index.js
+    });
+  });
+
+  //it('initializes Keycloak and renders App component on successful authentication', async () => {
+
+    //// Assertions to ensure Keycloak was initialized and App was rendered
+    //expect(mockKeycloakInstance.init).toHaveBeenCalled();
+    //expect(store.dispatch).toHaveBeenCalledWith(setAuthenticated({
+      //isAuthenticated: true,
+      //user: mockKeycloakInstance.tokenParsed,
+    //}));
+    //expect(store.dispatch).toHaveBeenCalledWith(setUser(expect.any(Object)));
+    //expect(ReactDOM.render).toHaveBeenCalledWith(
+      //<Provider store={store}>
+        //<React.StrictMode>
+          //<App />
+        //</React.StrictMode>
+      //</Provider>,
+      //document.getElementById('root')
+    //);
+  //});
+
+  //it('attempts to refresh token periodically', () => {
+    //jest.useFakeTimers();
+    //require('./index');
+
+    //expect(mockKeycloakInstance.updateToken).not.toHaveBeenCalled();
+    //act(() => {
+      //jest.advanceTimersByTime(60000); // Advance by 60 seconds to simulate setInterval
+    //});
+    //expect(mockKeycloakInstance.updateToken).toHaveBeenCalled();
+    //jest.useRealTimers();
+  //});
+  //it('attempts to refresh token periodically', () => {
+  //// No need to dynamically require index.js if it's already required in beforeEach
+  //expect(mockKeycloakInstance.updateToken).not.toHaveBeenCalled();
+  //jest.advanceTimersByTime(60000); // Advance by 60 seconds
+  //expect(mockKeycloakInstance.updateToken).toHaveBeenCalled();
+//});
+
+
+  //it('logs in user if not authenticated', async () => {
+    //mockKeycloakInstance.init.mockImplementation(() => Promise.resolve(false));
+
+    //await act(async () => {
+      //require('./index');
+    //});
+
+    //// Assuming keycloak.login is called when not authenticated
+    //expect(mockKeycloakInstance.login).toHaveBeenCalled();
+  //});
+
+  //it('logs in user if not authenticated', async () => {
+  //// Mock the init method to simulate the user not being authenticated
+  //mockKeycloakInstance.init.mockResolvedValue(false);
+
+  // Require or import your module here, after setting up the mock, to ensure it uses the mocked version
+  // Note: You may need to reset modules and re-import if you're dynamically requiring your module in each test
+  //jest.resetModules();
+  //const index = require('./index'); // Dynamically require index.js to ensure it uses the mocked version
+
+  //// Since this operation is asynchronous, we need to wait for the next event loop tick
+  //// to allow all promises to resolve
+  //await new Promise(process.nextTick);
+
+  //// Check that login was called since init is mocked to resolve with false
+  //expect(mockKeycloakInstance.login).toHaveBeenCalled();
+//});
+
+
+  // Additional tests can be written to handle failed Keycloak initialization, token refresh errors, and more
+});
+

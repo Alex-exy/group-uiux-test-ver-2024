@@ -6,7 +6,7 @@ import PastRidesDetails from "./PastRides/PastRidesDetails"
 // Import necessary components and hooks from react-router-dom
 import { BrowserRouter as Router, Routes, Route, NavLink } from 'react-router-dom';
 import { CNavbar, CContainer, CNavbarBrand, CNavbarToggler, CCollapse, CNavItem, CNavbarNav} from '@coreui/react';
-import Profile from './Profile';
+import Profile from './Profile/Profile';
 import userProfile from './john_doe.jpeg';
 
 import ReserveARide from './ReserveARide/reservearide';
@@ -20,7 +20,7 @@ import ReserveARidePage from './ReserveARide/ReserveARidePage';
 import ListRides from './ReserveARide/ListRides';
 
 
-const Pricing = () => <div>Pricing</div>;
+const Pricing = () => <div>A pricing page just to demonstrate basic static text pages.</div>;
 
 // -------------------------------------------------------
 

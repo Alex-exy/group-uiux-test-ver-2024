@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setSelectedRide } from '../../store/rideSlice';
 
-const JoinARide = ({ isLoggedIn }) => {
+const JoinARide = () => {
     const [availableRides, setAvailableRides] = useState([]);
     const [loginInfo, setLoginInfo] = useState(false);
 
@@ -28,7 +28,7 @@ const JoinARide = ({ isLoggedIn }) => {
     }, []);
 
     const handleSelection = (ride) => {
-        //Cannot log after tests are done. Did you forget to wait for something async in your test?    
+        //Cannot log after tests are done.  
         dispatch(setSelectedRide(ride));
         navigate(`/confirm-joining/${ride.id}/Confirm`);
     };
@@ -82,7 +82,8 @@ const JoinARide = ({ isLoggedIn }) => {
                 </CTableBody>
             </CTable>
 
-            { /* No Longer required
+            {
+            /* No Longer required
             <CModal visible={loginInfo} onClose={() => setLoginInfo(false)}>
                 <CModalHeader>
                     <CModalTitle>Please login to join a ride!</CModalTitle>
@@ -91,7 +92,8 @@ const JoinARide = ({ isLoggedIn }) => {
                     <CButton color="primary" onClick={() => setLoginInfo(false)}>Ok</CButton>
                 </CModalFooter>
             </CModal >
-             */ }
+             */ 
+            }
         </div >
     );
 };

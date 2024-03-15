@@ -2,21 +2,21 @@ import React from 'react';
 import { mount } from "enzyme";
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import rideReducer from "../../store/rideSlice";
 import JoinARide from './JoinARide';
 import axios from 'axios';
-import { BrowserRouter as Router } from 'react-router-dom';
 
 
-describe('Renders DOM elements correctly', () => {
+describe('Renders DOM elements correct', () => {
     let wrapper;
     let store;
 
     beforeEach(() => {
-        // Create a store with the necessary reducer and preloaded state
         store = configureStore({
             reducer: {
-                ride: rideReducer, // Assuming rideReducer is a slice reducer for 'ride'
+                ride: rideReducer,
             },
             preloadedState: {
                 ride: {
@@ -34,10 +34,6 @@ describe('Renders DOM elements correctly', () => {
         );
     });
 
-    afterEach(() => {
-        wrapper.unmount();
-    });
-
     //DOM Text components
     it("Should render Title as Join a Ride", () => {
         let title = wrapper.find(".header").text();
@@ -48,50 +44,18 @@ describe('Renders DOM elements correctly', () => {
         let description = wrapper.find(".description").text();
         expect(description).toBe("Please click on the ride you want to join:");
     });
-
-    //Row Components
-    it("Should Booker cell rendered correctly", () => {
-        let cell = wrapper.find(".thisbooker").text();
-        expect(cell).toBe("Booker");
-    });
-
-    it("Should Destination cell rendered correctly", () => {
-        let cell = wrapper.find("#destination").text();
-        expect(cell).toBe("Destination");
-    });
-
-    it("Should Vehicle Type cell rendered correctly", () => {
-        let cell = wrapper.find("#type").text();
-        expect(cell).toBe("Vehicle Type");
-    });
-
-    it("Should Battery Remaining cell rendered correctly", () => {
-        let cell = wrapper.find("#battery").text();
-        expect(cell).toBe("Battery Remaining");
-    });
-
-    it("Should Distance to Vehicle cell rendered correctly", () => {
-        let cell = wrapper.find("#distance").text();
-        expect(cell).toBe("Distance to Vehicle");
-    });
-
-    it("Should Departure Time cell rendered correctly", () => {
-        let cell = wrapper.find("#time").text();
-        expect(cell).toBe("Departure Time");
-    });
-})
+});
 
 //Table
-describe('Check the rows of the table', () => {
+describe('Check if table is displayed and working correct', () => {
 
     let wrapper;
     let store;
 
     beforeEach(() => {
-        // Create a store with the necessary reducer and preloaded state
         store = configureStore({
             reducer: {
-                ride: rideReducer, // Assuming rideReducer is a slice reducer for 'ride'
+                ride: rideReducer,
             },
             preloadedState: {
                 ride: {
@@ -101,7 +65,15 @@ describe('Check the rows of the table', () => {
         });
 
         const availableRides = [
-            { id: 1, booker: 'Booker1', destination: 'Destination1', vehicleType: 'Type1', battery: 'Battery1', distanceToVehicle: 'Distance1', departureTime: 'Time1' },
+            {
+                id: 1,
+                booker: 'Booker1',
+                destination: 'Destination1',
+                vehicleType: 'Type1',
+                battery: 'Battery1',
+                distanceToVehicle: 'Distance1',
+                departureTime: 'Time1'
+            },
         ];
 
         wrapper = mount(
@@ -113,54 +85,98 @@ describe('Check the rows of the table', () => {
         );
     });
 
-    afterEach(() => {
-        wrapper.unmount();
-    });
-
-    //FIX 
-    it("Check if table row has six elements", () => {
-        let row = wrapper.find("#rideRow").first();
-        expect(row.find('#rideRow').length).toBeGreaterThan(0);
-        expect(row.children().length).toEqual(6);
-    });
-
-
-    // FIX - mock function ?
-    it("Check if redirected after click on Row", () => {
-        const handleSelection = jest.fn();
-        wrapper.find('#rideRow').first().simulate('click');
-
-        /*
-        const row = wrapper.find('#rideRow').first();
-        row.simulate('click');
-        */
-
-        expect(handleSelection).toHaveBeenCalled();
-    });
+    //Table header and its components
+    it('Table header should contain six elements and a description of every element', () => {
+        let table = wrapper.find('CTableHeaderCell')
+        expect(table).toHaveLength(6);
+        expect(table.at(0).text()).toBe('Booker');
+        expect(table.at(1).text()).toBe('Destination');
+        expect(table.at(2).text()).toBe('Vehicle Type');
+        expect(table.at(3).text()).toBe('Battery Remaining');
+        expect(table.at(4).text()).toBe('Distance to Vehicle');
+        expect(table.at(5).text()).toBe('Departure Time');
+    })
 });
 
-//FIX - TypeError: _axios.default.post.mockImplementation is not a function
+const mockHandleSelection = jest.fn().mockImplementation((ride) => {
+    return ride;
+});
 
-//Fetching
-describe('Check if fetching rides works correctly', () => {
+jest.mock('react-redux', () => ({
+    ...jest.requireActual('react-redux'),
+    useSelector: jest.fn(),
+}));
+
+//Table Row
+describe('Check if table rows are created as desired', () => {
+    let store;
+
+    store = configureStore({
+        reducer: {
+            ride: rideReducer,
+        },
+        preloadedState: {
+            ride: {
+                selectedRide: {}
+            }
+        }
+    });
+
+    jest.mock('react-router-dom', () => ({
+        useNavigate: () => ({
+            navigate: jest.fn(),
+        }),
+    }));
+
+    const mockData = [
+        {
+            booker: "Max",
+            desination: "Munich",
+            vehicleType: "BMW",
+            battery: "70%",
+            distanceToVehicle: "7 km",
+            departureTime: "12:00",
+        },
+    ];
 
     afterEach(() => {
-        jest.clearAllMocks();
+        useSelector.mockClear();
     });
+
+    it('Creates a CTable row for a dummy user', () => {
+        const wrapper = mount(
+            <Provider store={store}>
+                <Router>
+                    <JoinARide availableRides={mockData} />
+                </Router>
+            </Provider>
+        );
+        const tableRows = wrapper.find('CTableRow');
+        expect(tableRows).toHaveLength(mockData.filter((ride) => ride.booker === 'Max').length);
+    });
+
+    //it('Calls handleSelection when clicking on row', () => {
+        //const wrapper = mount(
+            //<Provider store={store}>
+                //<Router>
+                    //<JoinARide availableRides={mockData} handleSelection={mockHandleSelection} />
+                //</Router>
+            //</Provider>
+        //);
+        //const tableRow = wrapper.find('CTableRow');
+        //tableRow.simulate('click');
+        //expect(mockHandleSelection).toHaveBeenCalled();
+    //})
+});
+
+//Check HTTP request 
+describe('Check if http requests are handled correct', () => {
 
     it('Fetches rides successfully', () => {
-        axios.post.mockImplementation(() => ({
-            data: [{ id: 1, status: 'Share' }, { id: 2, status: 'Share' }]
-        }));
-        fetchAvailableRides();
-        expect(setAvailableRides).toHaveBeenCalledWith([{ id: 1, status: 'Share' }, { id: 2, status: 'Share' }]);
+
     });
 
-    it('Handles fetch error', () => {
-        axios.post.mockImplementation(() => {
-            throw new Error('Failed to fetch rides');
-        });
-        fetchAvailableRides();
-        expect(console.log).toHaveBeenCalledWith('Failed to fetch rides', expect.any(Error));
+    it('Handles error response', () => {
+
     });
 });

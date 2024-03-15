@@ -6,17 +6,19 @@ Electic Vehicle Ride Share - A web based application for renting/lending electir
 
 ## Functionalitys
 Must have:
-* Search/filter for avaliable vehicles
+* Login with authentification
 * Reservation of vehicles (Other users cant see reserved vehicles)
-* Entering youre own vehicle as rentable
-* share rides with other users (see reserved vehicles and request join)
+* Join/share rides with other users (see reserved vehicles and request join)
+* See past rides
 
 Should have:
-* link/forwarding to map with geo marker
+* Confirmation
+* User Profile
 
 Nice to have:
 * display fastest route to selected vehicle in app
-
+* Entering youre own vehicle as rentable
+* link/forwarding to map with geo marker
 
 ## Technology Stack:
 * React

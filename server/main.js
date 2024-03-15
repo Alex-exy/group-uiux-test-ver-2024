@@ -4,6 +4,7 @@ import bodyParser from 'body-parser';
 
 import rideData from "./ridesData.js";
 
+
 const app = express();
 app.use(cors()); // Enable All CORS Requests
 
@@ -22,6 +23,11 @@ async function main() {
                 res.send('[{"_id":"65ea0ba4931607b3f3bade73","id":1,"type":"Car","distance":"10km","battery":"80%","info":"Electric","status":"Free"},{"_id":"65ea0ba4931607b3f3bade74","id":2,"type":"Bike","distance":"5km","battery":"60%","info":"Electric, Foldable","status":"Free"},{"_id":"65ea0ba4931607b3f3bade75","id":3,"type":"Scooter","distance":"3km","battery":"90%","info":"Electric","status":"Free"},{"_id":"65ea0e57931607b3f3bade76","id":1,"booker":"Alice Smith","destination":"Central Park","vehicleType":"Electric Car","battery":"85%","distanceToVehicle":"2km","departureTime":"14:00","status":"Share"},{"_id":"65ea0e57931607b3f3bade77","id":2,"booker":"Bob Johnson","destination":"Downtown","vehicleType":"Electric Scooter","battery":"70%","distanceToVehicle":"500m","departureTime":"15:30","status":"Share"}]');
             //} catch (err) {
                 //res.status(500).json({ error: 'An error occurred while fetching rides', details: err });
+            //}
+        });
+        app.post('/dummyConfirmation', async (req, res) => {
+            //try {
+                res.send('OK');
             //}
         });
     //try {
@@ -67,11 +73,5 @@ async function main() {
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
     main().catch(console.error);
-});
-
-// Properly handle close events
-process.on('SIGINT', async () => {
-    await client.close();
-    process.exit(0);
 });
 

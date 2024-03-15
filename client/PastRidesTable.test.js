@@ -8,26 +8,26 @@ jest.mock('react-redux', () => ({
   useSelector: jest.fn(),
 }));
 
+const rides = [
+  {
+    person: "John",
+    time: "09:30",
+    date: "2024-03-01",
+    model: "Tesla Model S",
+    distance: "150 km",
+    origin: "Paris",
+    destination: "Berlin",
+    imagePath: "https://hips.hearstapps.com/hmg-prod/images/2024-tesla-model-s-107-6572200e43fa1.jpg?crop=0.473xw:0.355xh;0.254xw,0.341xh&resize=1200:*"
+  },
+];
+
 jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom'),
-  useNavigate: jest.fn(),
+  useNavigate: () => ({
+    navigate: jest.fn(),
+  }),
 }));
 
 describe('PastRidesTable', () => {
-  
-  const rides = [
-    {
-      person: "John",
-      time: "09:30",
-      date: "2024-03-01",
-      model: "Tesla Model S",
-      distance: "150 km",
-      origin: "Paris",
-      destination: "Berlin",
-      imagePath: "https://hips.hearstapps.com/hmg-prod/images/2024-tesla-model-s-107-6572200e43fa1.jpg?crop=0.473xw:0.355xh;0.254xw,0.341xh&resize=1200:*"
-    },
-  ];
-
   beforeEach(() => {
     useSelector.mockReturnValue({
       auth: {
@@ -35,6 +35,7 @@ describe('PastRidesTable', () => {
       },
     });
   });
+
 
   afterEach(() => {
     useSelector.mockClear();
@@ -55,12 +56,10 @@ describe('PastRidesTable', () => {
     expect(headerCells.at(3).text()).toBe('Vehicle Model');
   });
 
-
   it('renders a table row for the ride of the selected user', () => {
     const wrapper = mount(<PastRidesTable />);
     const tableRows = wrapper.find('CTableRow');
-    expect(tableRows).toHaveLength(rides.filter((ride) => ride.person === 'John').length); 
+    expect(tableRows).toHaveLength(rides.filter((ride) => ride.person === 'John').length);
   });
-
 
 });
