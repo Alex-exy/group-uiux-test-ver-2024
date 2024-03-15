@@ -21,7 +21,6 @@ const Confirmation = () => {
     }
 
     const rideInfo = {
-
     };
 
     const handleResponse = async () => {
@@ -82,7 +81,6 @@ const Confirmation = () => {
                     </Link>
                 </CModalFooter>
             </CModal >
-            */
         </div >
     );
 };
